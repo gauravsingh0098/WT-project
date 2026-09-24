@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ABC Online Book Store</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --wine:#5c1a33;
+    --wine-dark:#450f26;
+    --gold:#c9a227;
+    --gold-light:#e0c15c;
+    --paper:#f6efe1;
+    --paper-100:#fbf7ee;
+    --ink:#2b1f1a;
+    --muted:#6b5d52;
+    --line:rgba(43,31,26,0.14);
+    --display:'Playfair Display', Georgia, serif;
+    --sans:'Source Sans 3', system-ui, sans-serif;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+  }
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    font-family:var(--sans);
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+
+  :focus-visible{
+    outline:2.5px solid var(--gold);
+    outline-offset:3px;
+  }
+
+  .wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* ---------- Header ---------- */
+  header.site{
+    background:var(--wine-dark);
+    border-bottom:3px solid var(--gold);
+    position:sticky;
+    top:0;
+    z-index:40;
+  }
+  header.site .wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding-top:18px;
+    padding-bottom:18px;
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:13px;
+  }
+  .brand-mark{
+    width:44px;height:44px;
+    border-radius:8px;
+    background:var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .brand-mark svg{width:24px;height:24px;}
+  .brand-name{
+    font-family:var(--display);
+    font-size:1.4rem;
+    font-weight:700;
+    color:var(--paper-100);
+    line-height:1.1;
+  }
+  .brand-tag{
+    font-size:0.76rem;
+    color:var(--gold-light);
+    letter-spacing:0.02em;
+    margin-top:2px;
+    font-style:italic;
+  }
+  nav.primary ul{
+    display:flex;
+    gap:28px;
+    font-size:0.9rem;
+    font-weight:500;
+  }
+  nav.primary a{
+    color:var(--paper-100);
+    position:relative;
+    padding:4px 0;
+  }
+  nav.primary a::after{
+    content:"";
+    position:absolute;
+    left:0; bottom:-2px;
+    width:0%;
+    height:1.5px;
+    background:var(--gold);
+    transition:width 0.25s ease;
+  }
+  nav.primary a:hover::after,
+  nav.primary a:focus-visible::after{width:100%;}
+
+  @media (max-width:880px){
+    nav.primary{display:none;}
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    background:
+      radial-gradient(ellipse 760px 440px at 84% 0%, rgba(201,162,39,0.14), transparent 60%),
+      var(--wine);
+    color:var(--paper-100);
+    overflow:hidden;
+    position:relative;
+  }
+  .hero .wrap{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:48px;
+    align-items:center;
+    padding-top:80px;
+    padding-bottom:80px;
+  }
+  .hero-copy{
+    opacity:0;
+    animation:riseIn 0.7s cubic-bezier(.2,.7,.3,1) 0.1s forwards;
+  }
+  .hero-copy .tagline{
+    font-family:var(--display);
+    font-style:italic;
+    font-size:1rem;
+    color:var(--gold-light);
+    margin-bottom:16px;
+  }
+  .hero-copy h1{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:clamp(2.1rem, 4vw, 2.9rem);
+    line-height:1.18;
+  }
+  .hero-copy p.lede{
+    margin-top:20px;
+    font-size:1.05rem;
+    color:rgba(246,239,225,0.8);
+    max-width:46ch;
+  }
+  .hero-actions{
+    margin-top:32px;
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:13px 26px;
+    border-radius:6px;
+    font-weight:600;
+    font-size:0.92rem;
+    transition:transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  }
+  .btn-primary{
+    background:var(--gold);
+    color:var(--wine-dark);
+  }
+  .btn-primary:hover{background:var(--gold-light); transform:translateY(-2px); box-shadow:0 12px 26px -12px rgba(201,162,39,0.55);}
+  .btn-ghost{
+    background:transparent;
+    color:var(--paper-100);
+    border:1.5px solid rgba(246,239,225,0.32);
+  }
+  .btn-ghost:hover{border-color:var(--gold); color:var(--gold-light);}
+
+  /* ---------- Hero: open book illustration ---------- */
+  .hero-art{
+    opacity:0;
+    animation:riseIn 0.8s cubic-bezier(.2,.7,.3,1) 0.35s forwards;
+    display:flex;
+    justify-content:center;
+  }
+  .book-stage svg{width:280px; height:auto;}
+  .page-flip{
+    transform-origin:150px 90px;
+    animation:flip 4.5s ease-in-out infinite;
+  }
+  @keyframes flip{
+    0%,40%{transform:rotateY(0deg); }
+    55%{transform:rotateY(-140deg);}
+    70%,100%{transform:rotateY(0deg);}
+  }
+
+  @keyframes riseIn{
+    from{opacity:0; transform:translateY(16px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+
+  /* ---------- Sections ---------- */
+  section{padding:84px 0;}
+  .section-head{
+    max-width:56ch;
+    margin-bottom:40px;
+    text-align:center;
+    margin-left:auto;
+    margin-right:auto;
+  }
+  .section-head h2{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:clamp(1.7rem, 2.6vw, 2.15rem);
+    color:var(--wine);
+  }
+  .section-head .rule{
+    width:48px; height:2px;
+    background:var(--gold);
+    margin:16px auto 0;
+  }
+
+  /* ---------- Welcome ---------- */
+  .welcome{
+    background:var(--paper);
+    text-align:center;
+  }
+  .welcome p{
+    max-width:60ch;
+    margin:0 auto;
+    font-size:1.06rem;
+    color:var(--muted);
+  }
+
+  /* ---------- Categories ---------- */
+  .categories{
+    background:var(--paper-100);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+  .cat-row{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:14px;
+  }
+  .cat-chip{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:30px;
+    padding:12px 22px;
+    font-weight:600;
+    font-size:0.94rem;
+    color:var(--wine);
+    transition:transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+  }
+  .cat-chip:hover{
+    transform:translateY(-3px);
+    background:var(--wine);
+    color:var(--paper-100);
+    box-shadow:0 16px 30px -18px rgba(92,26,51,0.4);
+  }
+  .cat-chip .spine{
+    width:7px; height:20px;
+    border-radius:2px;
+    background:var(--gold);
+    flex-shrink:0;
+  }
+  .cat-chip:hover .spine{background:var(--gold-light);}
+
+  /* ---------- Books ---------- */
+  .books{
+    background:var(--paper);
+  }
+  .book-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:22px;
+  }
+  .book-card{
+    background:var(--paper-100);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:26px 22px;
+    display:flex;
+    gap:18px;
+    align-items:flex-start;
+    transition:transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .book-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 24px 44px -26px rgba(43,31,26,0.28);
+  }
+  .book-cover{
+    width:48px; height:64px;
+    border-radius:3px 6px 6px 3px;
+    flex-shrink:0;
+    position:relative;
+    box-shadow:2px 2px 0 rgba(43,31,26,0.12);
+  }
+  .book-cover::before{
+    content:"";
+    position:absolute;
+    left:0; top:0; bottom:0;
+    width:5px;
+    background:rgba(0,0,0,0.18);
+    border-radius:3px 0 0 3px;
+  }
+  .book-info h3{
+    font-family:var(--display);
+    font-size:1.06rem;
+    font-weight:600;
+    color:var(--wine);
+    margin-bottom:4px;
+    line-height:1.3;
+  }
+  .book-info .author{
+    font-size:0.86rem;
+    color:var(--muted);
+    font-style:italic;
+    margin-bottom:10px;
+  }
+  .book-price{
+    display:inline-block;
+    font-family:var(--display);
+    font-weight:700;
+    font-size:1.02rem;
+    color:var(--wine);
+    border-top:1px solid var(--line);
+    padding-top:8px;
+  }
+
+  @media (max-width:900px){
+    .book-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:600px){
+    .book-grid{grid-template-columns:1fr;}
+  }
+
+  /* ---------- Dynamic greeting badge ---------- */
+  .greeting-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:rgba(246,239,225,0.08);
+    border:1px solid rgba(246,239,225,0.22);
+    border-radius:100px;
+    padding:7px 16px 7px 12px;
+    font-size:0.85rem;
+    font-weight:600;
+    color:var(--gold-light);
+    margin-bottom:16px;
+  }
+  .greeting-badge .dot{
+    width:7px;height:7px;
+    border-radius:50%;
+    background:var(--gold);
+    flex-shrink:0;
+    animation:dotPulse 2.4s ease-in-out infinite;
+  }
+  @keyframes dotPulse{
+    0%,100%{box-shadow:0 0 0 0 rgba(201,162,39,0.5);}
+    50%{box-shadow:0 0 0 6px rgba(201,162,39,0);}
+  }
+
+  /* ---------- Book spotlight (dynamic content change) ---------- */
+  .book-spotlight{
+    margin-top:36px;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:30px;
+    display:flex;
+    align-items:center;
+    gap:26px;
+    flex-wrap:wrap;
+    justify-content:space-between;
+  }
+  .spotlight-info{display:flex; align-items:center; gap:18px;}
+  .spotlight-cover{
+    width:44px; height:58px;
+    border-radius:3px 6px 6px 3px;
+    flex-shrink:0;
+    box-shadow:2px 2px 0 rgba(43,31,26,0.12);
+  }
+  .spotlight-text h4{
+    font-family:var(--display);
+    font-size:1.1rem;
+    color:var(--wine);
+    font-weight:600;
+  }
+  .spotlight-text p{
+    font-size:0.86rem;
+    color:var(--muted);
+    font-style:italic;
+    margin-top:3px;
+  }
+  .spotlight-controls{display:flex; align-items:center; gap:14px;}
+  .spotlight-controls button{
+    width:38px;height:38px;
+    border-radius:50%;
+    border:1.5px solid var(--line);
+    background:var(--paper-100);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    transition:border-color 0.2s ease, background 0.2s ease;
+  }
+  .spotlight-controls button:hover{border-color:var(--gold); background:#fff;}
+  .spotlight-controls button svg{width:16px;height:16px;}
+  .spotlight-count{font-size:0.82rem; color:var(--muted); min-width:36px; text-align:center;}
+
+  /* ---------- Book description (show/hide) ---------- */
+  .featured{
+    background:var(--paper-100);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+  .featured-card{
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:24px;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:30px;
+    align-items:start;
+  }
+  .featured-cover{
+    width:64px; height:86px;
+    border-radius:3px 6px 6px 3px;
+    background:#3a6b52;
+    flex-shrink:0;
+    box-shadow:2px 2px 0 rgba(43,31,26,0.12);
+  }
+  .featured-info h4{
+    font-family:var(--display);
+    font-size:1.15rem;
+    color:var(--wine);
+    font-weight:600;
+  }
+  .featured-info .author{
+    font-size:0.86rem;
+    color:var(--muted);
+    font-style:italic;
+    margin-top:3px;
+  }
+  .featured-info p.summary{
+    margin-top:12px;
+    font-size:0.94rem;
+    color:var(--muted);
+  }
+  .book-details{
+    margin-top:16px;
+    padding-top:16px;
+    border-top:1px solid var(--line);
+    display:grid;
+    gap:8px;
+    font-size:0.9rem;
+    color:var(--muted);
+  }
+  .book-details.hidden{display:none;}
+  .toggle-btn{
+    margin-top:18px;
+    background:transparent;
+    color:var(--wine);
+    border:1.5px solid var(--line);
+    padding:9px 18px;
+    border-radius:6px;
+    font-weight:600;
+    font-size:0.86rem;
+    cursor:pointer;
+    transition:border-color 0.2s ease, background 0.2s ease;
+  }
+  .toggle-btn:hover{border-color:var(--gold);}
+
+  /* ---------- Cart estimate (bill calculation) ---------- */
+  .cart-estimate{background:var(--paper);}
+  .estimate-card{
+    background:var(--paper-100);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:34px;
+    max-width:620px;
+  }
+  .estimate-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:14px 0;
+    border-bottom:1px solid var(--line);
+    font-size:0.96rem;
+  }
+  .estimate-row:last-of-type{border-bottom:none;}
+  .estimate-row label{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    cursor:pointer;
+    color:var(--ink);
+  }
+  .estimate-row input[type="checkbox"]{
+    width:18px;height:18px;
+    accent-color:var(--wine);
+    cursor:pointer;
+  }
+  .estimate-row .price{color:var(--muted); font-weight:600;}
+  .estimate-total{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    margin-top:20px;
+    padding-top:20px;
+    border-top:2px solid var(--wine);
+  }
+  .estimate-total span{font-size:0.95rem; color:var(--muted); font-weight:600;}
+  .estimate-total strong{
+    font-family:var(--display);
+    font-size:1.7rem;
+    color:var(--wine);
+  }
+
+  /* ---------- Order enquiry form (form validation) ---------- */
+  .enquiry{background:var(--paper-100); border-top:1px solid var(--line);}
+  .enquiry-form{
+    max-width:620px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+  }
+  .form-field{display:flex; flex-direction:column; gap:6px;}
+  .form-field.full{grid-column:1 / -1;}
+  .form-field label{font-size:0.85rem; font-weight:600; color:var(--wine);}
+  .form-field input{
+    border:1.5px solid var(--line);
+    border-radius:6px;
+    padding:11px 14px;
+    font-size:0.95rem;
+    font-family:var(--sans);
+    color:var(--ink);
+    background:var(--paper);
+    transition:border-color 0.2s ease;
+  }
+  .form-field input:focus{border-color:var(--gold); outline:none;}
+  .form-field .field-error{font-size:0.78rem; color:#a13a3a; min-height:1em;}
+  .enquiry-form .btn-primary{
+    grid-column:1 / -1;
+    border:none;
+    cursor:pointer;
+    justify-self:start;
+    margin-top:6px;
+  }
+  #enquiryMessage{
+    grid-column:1 / -1;
+    font-size:0.92rem;
+    font-weight:600;
+    padding:12px 16px;
+    border-radius:6px;
+    display:none;
+  }
+  #enquiryMessage.success{display:block; background:rgba(201,162,39,0.18); color:var(--wine-dark);}
+  #enquiryMessage.error{display:block; background:rgba(161,58,58,0.12); color:#a13a3a;}
+
+  /* ---------- Implementation notes ---------- */
+  .impl-notes{background:var(--paper-100);}
+  .impl-notes .section-head{max-width:70ch;}
+  .impl-table{
+    width:100%;
+    border-collapse:collapse;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:14px;
+    overflow:hidden;
+    margin-bottom:44px;
+  }
+  .impl-table th, .impl-table td{text-align:left; padding:14px 18px; border-bottom:1px solid var(--line); font-size:0.92rem; vertical-align:top;}
+  .impl-table th{background:var(--wine-dark); color:var(--paper-100); font-weight:600; font-size:0.85rem;}
+  .impl-table tr:last-child td{border-bottom:none;}
+  .impl-table td:first-child{font-weight:600; color:var(--wine); width:36px;}
+  .impl-detail{background:var(--paper); border:1px solid var(--line); border-radius:14px; padding:26px 28px; margin-bottom:16px;}
+  .impl-detail h4{font-family:var(--display); font-size:1.05rem; color:var(--wine); margin-bottom:8px;}
+  .impl-detail p{font-size:0.92rem; color:var(--muted);}
+  .impl-files li{display:flex; gap:10px; align-items:flex-start; margin-top:8px; font-size:0.9rem; color:var(--muted);}
+  .impl-files li::before{content:""; width:6px; height:6px; border-radius:50%; background:var(--gold); margin-top:7px; flex-shrink:0;}
+
+  @media (max-width:640px){
+    .enquiry-form{grid-template-columns:1fr;}
+    .featured-card{grid-template-columns:1fr; text-align:left;}
+  }
+
+  /* ---------- Offer ---------- */
+  .offer{
+    background:var(--wine-dark);
+    color:var(--paper-100);
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .offer-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:var(--gold);
+    color:var(--wine-dark);
+    padding:10px 22px;
+    border-radius:30px;
+    font-weight:700;
+    font-size:0.95rem;
+    margin-bottom:20px;
+    animation:offerPulse 2.6s ease-in-out infinite;
+  }
+  @keyframes offerPulse{
+    0%,100%{box-shadow:0 0 0 0 rgba(201,162,39,0.5);}
+    50%{box-shadow:0 0 0 12px rgba(201,162,39,0);}
+  }
+  .offer h2{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:clamp(1.6rem, 2.6vw, 2.1rem);
+    margin-bottom:10px;
+  }
+  .offer p{
+    color:rgba(246,239,225,0.78);
+    font-size:1.02rem;
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    background:var(--wine-dark);
+    color:rgba(246,239,225,0.55);
+    text-align:center;
+    padding:26px 0;
+    font-size:0.85rem;
+    border-top:1px solid rgba(246,239,225,0.12);
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 5c2-1 5-1 7 0v14c-2-1-5-1-7 0V5z" fill="#5c1a33"/><path d="M20 5c-2-1-5-1-7 0v14c2-1 5-1 7 0V5z" fill="#5c1a33"/></svg>
+      </div>
+      <div>
+        <div class="brand-name">ABC Online Book Store</div>
+        <div class="brand-tag">Your Online Destination for Books</div>
+      </div>
+    </div>
+    <nav class="primary" aria-label="Primary">
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#books">Books</a></li>
+        <li><a href="#categories">Categories</a></li>
+        <li><a href="#offers">Offers</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="home">
+  <div class="wrap">
+    <div class="hero-copy">
+      <div class="greeting-badge" id="greetingBadge"><span class="dot" aria-hidden="true"></span><span id="greetingText">Welcome to ABC Online Book Store</span></div>
+      <div class="tagline">Your Online Destination for Books</div>
+      <h1>Welcome to ABC Online Book Store</h1>
+      <p class="lede">Find books from different categories including technology, programming, fiction, business and education.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#books">Browse books</a>
+        <a class="btn btn-ghost" href="#offers">See offers</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="book-stage">
+        <svg viewBox="0 0 300 200" fill="none">
+          <rect x="20" y="150" width="260" height="10" rx="2" fill="#450f26"/>
+          <g class="page-flip">
+            <path d="M150 90 L150 170 C120 155 90 150 60 152 L60 78 C90 76 120 80 150 90Z" fill="#fbf7ee"/>
+            <path d="M150 90 L150 170 C180 155 210 150 240 152 L240 78 C210 76 180 80 150 90Z" fill="#f6efe1"/>
+            <path d="M68 90 L142 92" stroke="#c9a227" stroke-width="1.4" opacity="0.5"/>
+            <path d="M68 102 L138 104" stroke="#c9a227" stroke-width="1.4" opacity="0.5"/>
+            <path d="M68 114 L140 116" stroke="#c9a227" stroke-width="1.4" opacity="0.5"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="welcome">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Welcome to ABC Online Book Store</h2>
+      <div class="rule"></div>
+    </div>
+    <p>Find books from different categories including technology, programming, fiction, business and education.</p>
+  </div>
+</section>
+
+<section class="categories" id="categories">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Book Categories</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="cat-row">
+      <div class="cat-chip"><span class="spine"></span>Programming</div>
+      <div class="cat-chip"><span class="spine"></span>Computer Science</div>
+      <div class="cat-chip"><span class="spine"></span>Business</div>
+      <div class="cat-chip"><span class="spine"></span>Fiction</div>
+      <div class="cat-chip"><span class="spine"></span>Competitive Exams</div>
+    </div>
+  </div>
+</section>
+
+<section class="books" id="books">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Popular Books</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="book-grid">
+
+      <div class="book-card">
+        <div class="book-cover" style="background:#3a6b52;"></div>
+        <div class="book-info">
+          <h3>Python Programming</h3>
+          <div class="author">John Smith</div>
+          <span class="book-price">₹450</span>
+        </div>
+      </div>
+
+      <div class="book-card">
+        <div class="book-cover" style="background:#2f5a7c;"></div>
+        <div class="book-info">
+          <h3>Web Technology</h3>
+          <div class="author">David Brown</div>
+          <span class="book-price">₹500</span>
+        </div>
+      </div>
+
+      <div class="book-card">
+        <div class="book-cover" style="background:#8a4a2e;"></div>
+        <div class="book-info">
+          <h3>Database Management</h3>
+          <div class="author">Robert Lee</div>
+          <span class="book-price">₹550</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="book-spotlight">
+      <div class="spotlight-info">
+        <div class="spotlight-cover" id="spotlightCover" style="background:#3a6b52;"></div>
+        <div class="spotlight-text">
+          <h4 id="spotlightTitle">Python Programming</h4>
+          <p id="spotlightAuthor">John Smith</p>
+        </div>
+      </div>
+      <div class="spotlight-controls">
+        <button type="button" id="spotlightPrev" aria-label="Previous book">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke="#5c1a33" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <span class="spotlight-count" id="spotlightCount">1 / 3</span>
+        <button type="button" id="spotlightNext" aria-label="Next book">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="#5c1a33" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="featured" id="featured">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Book of the Month</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="featured-card">
+      <div class="featured-cover" aria-hidden="true"></div>
+      <div class="featured-info">
+        <h4>Database Management</h4>
+        <div class="author">Robert Lee</div>
+        <p class="summary">A practical guide to designing, building, and managing relational databases from the ground up.</p>
+        <div class="book-details hidden" id="bookDetails">
+          <p><strong>Pages:</strong> 412</p>
+          <p><strong>Format:</strong> Paperback, with downloadable exercise files.</p>
+          <p><strong>Best for:</strong> Students and early-career developers learning SQL and schema design.</p>
+        </div>
+        <button type="button" class="toggle-btn" id="bookToggle">Read more</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cart-estimate" id="cart">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Estimate your order</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="estimate-card">
+      <div class="estimate-row">
+        <label><input type="checkbox" class="bill-item" value="450" data-name="Python Programming"> Python Programming</label>
+        <span class="price">₹450</span>
+      </div>
+      <div class="estimate-row">
+        <label><input type="checkbox" class="bill-item" value="500" data-name="Web Technology"> Web Technology</label>
+        <span class="price">₹500</span>
+      </div>
+      <div class="estimate-row">
+        <label><input type="checkbox" class="bill-item" value="550" data-name="Database Management"> Database Management</label>
+        <span class="price">₹550</span>
+      </div>
+      <div class="estimate-total">
+        <span>Estimated total</span>
+        <strong id="billTotal">₹0</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="enquiry" id="enquiry">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Order enquiry</h2>
+      <div class="rule"></div>
+    </div>
+    <form class="enquiry-form" id="enquiryForm" novalidate>
+      <div class="form-field">
+        <label for="buyerName">Full name</label>
+        <input type="text" id="buyerName" placeholder="Your name">
+        <span class="field-error" id="err-buyerName"></span>
+      </div>
+      <div class="form-field">
+        <label for="buyerEmail">Email</label>
+        <input type="text" id="buyerEmail" placeholder="you@example.com">
+        <span class="field-error" id="err-buyerEmail"></span>
+      </div>
+      <div class="form-field">
+        <label for="buyerMobile">Mobile number</label>
+        <input type="text" id="buyerMobile" placeholder="10-digit number">
+        <span class="field-error" id="err-buyerMobile"></span>
+      </div>
+      <div class="form-field">
+        <label for="buyerQty">Quantity</label>
+        <input type="text" id="buyerQty" placeholder="No. of books">
+        <span class="field-error" id="err-buyerQty"></span>
+      </div>
+      <div class="form-field full">
+        <label for="deliveryDate">Preferred delivery date</label>
+        <input type="date" id="deliveryDate">
+        <span class="field-error" id="err-deliveryDate"></span>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit enquiry</button>
+      <p id="enquiryMessage"></p>
+    </form>
+  </div>
+</section>
+
+<section class="offer" id="offers">
+  <div class="wrap">
+    <div class="offer-badge">20% OFF</div>
+    <h2>Special Offer</h2>
+    <p>Get 20% discount on selected books.</p>
+  </div>
+</section>
+
+<footer id="contact">© 2026 ABC Online Book Store</footer>
+
+<section class="impl-notes" id="implementation-notes">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Implementation summary</h2>
+      <p>Changes made to this website for the JavaScript Practical Assignment. All five required features are implemented directly inside this file.</p>
+    </div>
+    <table class="impl-table">
+      <thead>
+        <tr><th>No.</th><th>JavaScript Task</th><th>Where Implemented on the Site</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>Form Validation</td><td>"Order enquiry" section (id="enquiry"). Validates Name, Email, Mobile, Quantity, and Delivery Date.</td></tr>
+        <tr><td>2</td><td>Dynamic Greeting</td><td>Hero section (id="home"). A badge above the heading shows a time-based greeting.</td></tr>
+        <tr><td>3</td><td>Dynamic Bill / Price Calculation</td><td>"Estimate your order" section (id="cart"). Checkboxes for each book update a running total.</td></tr>
+        <tr><td>4</td><td>Show / Hide Content</td><td>"Book of the Month" section (id="featured"). A "Read more / Read less" button toggles extended book details.</td></tr>
+        <tr><td>5</td><td>Dynamic Content / Image Change</td><td>"Popular Books" section (id="books"). A spotlight card with Previous/Next buttons cycles through all 3 books.</td></tr>
+      </tbody>
+    </table>
+    <div class="impl-detail">
+      <h4>1. Form Validation — Order Enquiry Form</h4>
+      <p>Collects buyer name, email, mobile number, quantity, and preferred delivery date. JavaScript checks for empty fields, a letters-only name, a valid email pattern, a 10-digit mobile number, a quantity between 1 and 50, and a date that isn't in the past. Shows a success or error message and resets on success.</p>
+    </div>
+    <div class="impl-detail">
+      <h4>2. Dynamic Greeting</h4>
+      <p>Reads the current hour with <code>new Date().getHours()</code> on page load and displays "Good Morning", "Good Afternoon", or "Good Evening" in a badge above the hero heading.</p>
+    </div>
+    <div class="impl-detail">
+      <h4>3. Dynamic Bill / Price Calculation</h4>
+      <p>Python Programming (₹450), Web Technology (₹500), and Database Management (₹550) are selectable checkboxes. A "change" listener recalculates the total instantly as books are checked or unchecked.</p>
+    </div>
+    <div class="impl-detail">
+      <h4>4. Show / Hide Content</h4>
+      <p>The Book of the Month card has a "Read more" button that toggles a hidden CSS class to reveal page count, format, and audience details. The label switches between "Read more" and "Read less".</p>
+    </div>
+    <div class="impl-detail">
+      <h4>5. Dynamic Content / Image Change</h4>
+      <p>A book spotlight widget with Previous/Next buttons updates the displayed title, author, and cover color, cycling through all three featured books.</p>
+    </div>
+    <div class="impl-detail">
+      <h4>Files changed</h4>
+      <ul class="impl-files">
+        <li>abc-book-store.html — added the five sections/features above with matching CSS and a single JavaScript block before the closing &lt;/body&gt; tag. No existing content was removed.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<script>
+/* 1. Dynamic Greeting */
+(function(){
+  var hour = new Date().getHours();
+  var greeting;
+  if (hour < 12) greeting = "Good Morning! Welcome to ABC Online Book Store.";
+  else if (hour < 18) greeting = "Good Afternoon! Welcome to ABC Online Book Store.";
+  else greeting = "Good Evening! Welcome to ABC Online Book Store.";
+  document.getElementById("greetingText").textContent = greeting;
+})();
+
+/* 5. Book Spotlight — Dynamic Content Change */
+(function(){
+  var books = [
+    { title:"Python Programming", author:"John Smith", color:"#3a6b52" },
+    { title:"Web Technology", author:"David Brown", color:"#2f5a7c" },
+    { title:"Database Management", author:"Robert Lee", color:"#8a4a2e" }
+  ];
+  var current = 0;
+  var titleEl = document.getElementById("spotlightTitle");
+  var authorEl = document.getElementById("spotlightAuthor");
+  var coverEl = document.getElementById("spotlightCover");
+  var countEl = document.getElementById("spotlightCount");
+
+  function render(){
+    var book = books[current];
+    titleEl.textContent = book.title;
+    authorEl.textContent = book.author;
+    coverEl.style.background = book.color;
+    countEl.textContent = (current + 1) + " / " + books.length;
+  }
+  document.getElementById("spotlightNext").addEventListener("click", function(){
+    current = (current + 1) % books.length;
+    render();
+  });
+  document.getElementById("spotlightPrev").addEventListener("click", function(){
+    current = (current - 1 + books.length) % books.length;
+    render();
+  });
+  render();
+})();
+
+/* 4. Show / Hide Book Details */
+(function(){
+  var details = document.getElementById("bookDetails");
+  var toggle = document.getElementById("bookToggle");
+  toggle.addEventListener("click", function(){
+    var isHidden = details.classList.contains("hidden");
+    if (isHidden){ details.classList.remove("hidden"); toggle.textContent = "Read less"; }
+    else { details.classList.add("hidden"); toggle.textContent = "Read more"; }
+  });
+})();
+
+/* 3. Dynamic Bill Calculation */
+(function(){
+  var checkboxes = document.querySelectorAll(".bill-item");
+  var totalEl = document.getElementById("billTotal");
+  function updateTotal(){
+    var total = 0;
+    checkboxes.forEach(function(box){ if (box.checked) total += Number(box.value); });
+    totalEl.textContent = "₹" + total;
+  }
+  checkboxes.forEach(function(box){ box.addEventListener("change", updateTotal); });
+})();
+
+/* 2. Order Enquiry Form Validation */
+(function(){
+  var form = document.getElementById("enquiryForm");
+  var message = document.getElementById("enquiryMessage");
+
+  function setError(id, text){ document.getElementById("err-" + id).textContent = text; }
+  function clearErrors(){
+    ["buyerName","buyerEmail","buyerMobile","buyerQty","deliveryDate"].forEach(function(id){ setError(id, ""); });
+    message.className = ""; message.textContent = "";
+  }
+
+  form.addEventListener("submit", function(event){
+    event.preventDefault();
+    clearErrors();
+
+    var name = document.getElementById("buyerName").value.trim();
+    var email = document.getElementById("buyerEmail").value.trim();
+    var mobile = document.getElementById("buyerMobile").value.trim();
+    var qty = document.getElementById("buyerQty").value.trim();
+    var date = document.getElementById("deliveryDate").value;
+    var valid = true;
+
+    if (name === "") { setError("buyerName", "Please enter your name."); valid = false; }
+    else if (!/^[A-Za-z\s]{2,}$/.test(name)) { setError("buyerName", "Name should contain letters only."); valid = false; }
+
+    var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (email === "") { setError("buyerEmail", "Please enter an email address."); valid = false; }
+    else if (!emailPattern.test(email)) { setError("buyerEmail", "Please enter a valid email address."); valid = false; }
+
+    if (mobile === "") { setError("buyerMobile", "Please enter a mobile number."); valid = false; }
+    else if (!/^\d{10}$/.test(mobile)) { setError("buyerMobile", "Enter a valid 10-digit mobile number."); valid = false; }
+
+    if (qty === "") { setError("buyerQty", "Please enter a quantity."); valid = false; }
+    else if (isNaN(qty) || Number(qty) < 1 || Number(qty) > 50) { setError("buyerQty", "Enter a valid quantity (1–50)."); valid = false; }
+
+    if (date === "") { setError("deliveryDate", "Please select a date."); valid = false; }
+    else {
+      var today = new Date(); today.setHours(0,0,0,0);
+      var chosen = new Date(date);
+      if (chosen < today) { setError("deliveryDate", "Date cannot be in the past."); valid = false; }
+    }
+
+    if (valid){
+      message.className = "success";
+      message.textContent = "Enquiry received! We'll get back to you shortly.";
+      form.reset();
+    } else {
+      message.className = "error";
+      message.textContent = "Please fix the highlighted fields and try again.";
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

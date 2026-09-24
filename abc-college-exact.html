@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ABC College of Technology</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-950:#0e1330;
+    --navy-800:#171d45;
+    --cyan:#2dd4bf;
+    --gold:#f2b134;
+    --paper:#f7f7fb;
+    --ink:#161a2e;
+    --muted:#5a5f78;
+    --line:rgba(14,19,48,0.12);
+    --display:'Sora', system-ui, sans-serif;
+    --sans:'Inter', system-ui, sans-serif;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+  }
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    font-family:var(--sans);
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+
+  :focus-visible{
+    outline:2.5px solid var(--gold);
+    outline-offset:3px;
+  }
+
+  .wrap{
+    max-width:960px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* ---------- Header ---------- */
+  header.site{
+    background:var(--navy-950);
+    color:#fff;
+    padding:26px 0;
+  }
+  header.site .wrap{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:6px;
+    text-align:center;
+  }
+  .brand-name{
+    font-family:var(--display);
+    font-size:1.9rem;
+    font-weight:800;
+    letter-spacing:-0.01em;
+    opacity:0;
+    animation:riseIn 0.6s ease 0.05s forwards;
+  }
+  .brand-tag{
+    font-size:0.9rem;
+    color:var(--cyan);
+    letter-spacing:0.04em;
+    opacity:0;
+    animation:riseIn 0.6s ease 0.2s forwards;
+  }
+
+  /* ---------- Nav ---------- */
+  nav.primary{
+    background:var(--navy-800);
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  nav.primary .wrap{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+  nav.primary ul{
+    display:flex;
+    gap:6px;
+    flex-wrap:wrap;
+  }
+  nav.primary a{
+    display:block;
+    padding:14px 18px;
+    color:rgba(255,255,255,0.85);
+    font-size:0.92rem;
+    font-weight:500;
+    position:relative;
+    transition:color 0.2s ease;
+  }
+  nav.primary a::after{
+    content:"";
+    position:absolute;
+    left:18px; right:18px; bottom:8px;
+    height:2px;
+    background:var(--gold);
+    transform:scaleX(0);
+    transform-origin:left;
+    transition:transform 0.25s ease;
+  }
+  nav.primary a:hover{color:#fff;}
+  nav.primary a:hover::after{transform:scaleX(1);}
+
+  /* ---------- Hero / Welcome ---------- */
+  .hero{
+    background:
+      radial-gradient(ellipse 700px 400px at 80% -10%, rgba(45,212,191,0.12), transparent 60%),
+      var(--paper);
+    border-bottom:1px solid var(--line);
+    padding:64px 0;
+  }
+  .hero .wrap{
+    opacity:0;
+    animation:riseIn 0.7s cubic-bezier(.2,.7,.3,1) 0.1s forwards;
+  }
+  .hero h1{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:clamp(1.8rem, 3.4vw, 2.5rem);
+    color:var(--navy-950);
+    margin-bottom:16px;
+  }
+  .hero p{
+    font-size:1.05rem;
+    color:var(--muted);
+    max-width:64ch;
+  }
+
+  /* ---------- Courses ---------- */
+  section{padding:64px 0;}
+  .courses{
+    background:#fff;
+    border-bottom:1px solid var(--line);
+  }
+  .courses h2{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:1.7rem;
+    color:var(--navy-950);
+    margin-bottom:32px;
+  }
+  .course-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:16px;
+  }
+  .course-card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:22px 24px;
+    font-family:var(--display);
+    font-weight:600;
+    font-size:1.02rem;
+    color:var(--navy-950);
+    display:flex;
+    align-items:center;
+    gap:14px;
+    transition:transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .course-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 20px 40px -24px rgba(14,19,48,0.3);
+    border-color:var(--navy-800);
+  }
+  .course-dot{
+    width:10px;height:10px;
+    border-radius:50%;
+    background:var(--cyan);
+    flex-shrink:0;
+    transition:transform 0.25s ease;
+  }
+  .course-card:hover .course-dot{
+    background:var(--gold);
+    transform:scale(1.3);
+  }
+
+  @media (max-width:600px){
+    .course-grid{grid-template-columns:1fr;}
+  }
+
+  /* ---------- Dynamic greeting badge ---------- */
+  .greeting-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:100px;
+    padding:7px 16px 7px 12px;
+    font-size:0.85rem;
+    font-weight:600;
+    color:var(--navy-950);
+    margin-bottom:18px;
+  }
+  .greeting-badge .dot{
+    width:7px;height:7px;
+    border-radius:50%;
+    background:var(--gold);
+    flex-shrink:0;
+  }
+
+  /* ---------- Course spotlight (dynamic content change) ---------- */
+  .course-spotlight{
+    margin-top:34px;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:28px;
+    display:flex;
+    align-items:center;
+    gap:26px;
+    flex-wrap:wrap;
+    justify-content:space-between;
+  }
+  .spotlight-info{display:flex; align-items:center; gap:18px;}
+  .spotlight-dot{
+    width:14px;height:14px;
+    border-radius:50%;
+    background:var(--cyan);
+    flex-shrink:0;
+  }
+  .spotlight-text h4{
+    font-family:var(--display);
+    font-size:1.08rem;
+    color:var(--navy-950);
+    font-weight:600;
+  }
+  .spotlight-controls{display:flex; align-items:center; gap:14px;}
+  .spotlight-controls button{
+    width:36px;height:36px;
+    border-radius:50%;
+    border:1.5px solid var(--line);
+    background:var(--paper);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    transition:border-color 0.2s ease, background 0.2s ease;
+  }
+  .spotlight-controls button:hover{border-color:var(--navy-800); background:#fff;}
+  .spotlight-controls button svg{width:15px;height:15px;}
+  .spotlight-count{font-size:0.82rem; color:var(--muted); min-width:36px; text-align:center;}
+
+  /* ---------- Course details (show/hide) ---------- */
+  .course-detail{
+    background:#fff;
+    border-bottom:1px solid var(--line);
+  }
+  .detail-card{
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:24px;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:30px;
+    align-items:start;
+  }
+  .detail-icon{
+    width:60px;height:60px;
+    border-radius:12px;
+    background:var(--navy-950);
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .detail-icon svg{width:28px;height:28px;}
+  .detail-info h4{
+    font-family:var(--display);
+    font-size:1.15rem;
+    color:var(--navy-950);
+    font-weight:600;
+  }
+  .detail-info p.summary{
+    margin-top:10px;
+    font-size:0.94rem;
+    color:var(--muted);
+  }
+  .course-extra{
+    margin-top:16px;
+    padding-top:16px;
+    border-top:1px solid var(--line);
+    display:grid;
+    gap:8px;
+    font-size:0.9rem;
+    color:var(--muted);
+  }
+  .course-extra.hidden{display:none;}
+  .toggle-btn{
+    margin-top:18px;
+    background:transparent;
+    color:var(--navy-950);
+    border:1.5px solid var(--line);
+    padding:9px 18px;
+    border-radius:7px;
+    font-weight:600;
+    font-size:0.86rem;
+    cursor:pointer;
+    transition:border-color 0.2s ease, background 0.2s ease;
+  }
+  .toggle-btn:hover{border-color:var(--cyan);}
+
+  /* ---------- Fee estimator (bill calculation) ---------- */
+  .fee-estimate{background:var(--paper); border-bottom:1px solid var(--line);}
+  .estimate-card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:32px;
+    max-width:600px;
+  }
+  .estimate-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:14px 0;
+    border-bottom:1px solid var(--line);
+    font-size:0.96rem;
+  }
+  .estimate-row:last-of-type{border-bottom:none;}
+  .estimate-row label{display:flex; align-items:center; gap:12px; cursor:pointer; color:var(--ink);}
+  .estimate-row input[type="checkbox"]{width:18px;height:18px; accent-color:var(--navy-950); cursor:pointer;}
+  .estimate-row .price{color:var(--muted); font-weight:600;}
+  .estimate-total{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    margin-top:20px;
+    padding-top:20px;
+    border-top:2px solid var(--navy-950);
+  }
+  .estimate-total span{font-size:0.95rem; color:var(--muted); font-weight:600;}
+  .estimate-total strong{font-family:var(--display); font-size:1.7rem; color:var(--navy-950);}
+
+  /* ---------- Admission enquiry form (form validation) ---------- */
+  .admission{background:#fff;}
+  .admission-form{
+    max-width:620px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+  }
+  .form-field{display:flex; flex-direction:column; gap:6px;}
+  .form-field.full{grid-column:1 / -1;}
+  .form-field label{font-size:0.85rem; font-weight:600; color:var(--navy-950);}
+  .form-field input{
+    border:1.5px solid var(--line);
+    border-radius:8px;
+    padding:11px 14px;
+    font-size:0.95rem;
+    font-family:var(--sans);
+    color:var(--ink);
+    background:var(--paper);
+    transition:border-color 0.2s ease;
+  }
+  .form-field input:focus{border-color:var(--cyan); outline:none;}
+  .form-field .field-error{font-size:0.78rem; color:#b23a2e; min-height:1em;}
+  .admission-form .btn-primary{
+    grid-column:1 / -1;
+    display:inline-flex;
+    align-items:center;
+    background:var(--navy-950);
+    color:#fff;
+    border:none;
+    padding:13px 26px;
+    border-radius:8px;
+    font-weight:600;
+    font-size:0.92rem;
+    cursor:pointer;
+    justify-self:start;
+    margin-top:6px;
+    transition:background 0.2s ease;
+  }
+  .admission-form .btn-primary:hover{background:var(--navy-800);}
+  #admissionMessage{
+    grid-column:1 / -1;
+    font-size:0.92rem;
+    font-weight:600;
+    padding:12px 16px;
+    border-radius:8px;
+    display:none;
+  }
+  #admissionMessage.success{display:block; background:rgba(45,212,191,0.14); color:var(--navy-950);}
+  #admissionMessage.error{display:block; background:rgba(178,58,46,0.1); color:#b23a2e;}
+
+  /* ---------- Implementation notes ---------- */
+  .impl-notes{background:var(--paper);}
+  .impl-notes .section-head{max-width:70ch;}
+  .impl-table{
+    width:100%;
+    border-collapse:collapse;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:12px;
+    overflow:hidden;
+    margin-bottom:40px;
+  }
+  .impl-table th, .impl-table td{text-align:left; padding:14px 18px; border-bottom:1px solid var(--line); font-size:0.92rem; vertical-align:top;}
+  .impl-table th{background:var(--navy-950); color:#fff; font-weight:600; font-size:0.85rem;}
+  .impl-table tr:last-child td{border-bottom:none;}
+  .impl-table td:first-child{font-weight:600; color:var(--navy-800); width:36px;}
+  .impl-detail{background:#fff; border:1px solid var(--line); border-radius:12px; padding:24px 26px; margin-bottom:14px;}
+  .impl-detail h4{font-family:var(--display); font-size:1.02rem; color:var(--navy-950); margin-bottom:8px;}
+  .impl-detail p{font-size:0.92rem; color:var(--muted);}
+  .impl-files li{display:flex; gap:10px; align-items:flex-start; margin-top:8px; font-size:0.9rem; color:var(--muted);}
+  .impl-files li::before{content:""; width:6px; height:6px; border-radius:50%; background:var(--gold); margin-top:7px; flex-shrink:0;}
+
+  @media (max-width:600px){
+    .admission-form{grid-template-columns:1fr;}
+    .detail-card{grid-template-columns:1fr; text-align:left;}
+  }
+
+  /* ---------- News ---------- */
+  .news{
+    background:var(--navy-950);
+    color:#fff;
+  }
+  .news h2{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:1.7rem;
+    margin-bottom:28px;
+  }
+  .news-list{
+    border-top:1px solid rgba(255,255,255,0.12);
+  }
+  .news-item{
+    display:flex;
+    align-items:baseline;
+    gap:18px;
+    padding:20px 0;
+    border-bottom:1px solid rgba(255,255,255,0.12);
+    transition:padding-left 0.25s ease;
+  }
+  .news-item:hover{padding-left:10px;}
+  .news-item .idx{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:1rem;
+    color:var(--gold);
+    flex-shrink:0;
+    width:22px;
+  }
+  .news-item p{
+    font-size:1rem;
+    color:rgba(255,255,255,0.9);
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    background:#0a0e24;
+    color:rgba(223,225,240,0.6);
+    text-align:center;
+    padding:26px 0;
+    font-size:0.85rem;
+  }
+
+  @keyframes riseIn{
+    from{opacity:0; transform:translateY(14px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <div class="brand-name">ABC College of Technology</div>
+    <div class="brand-tag">Knowledge | Innovation | Excellence</div>
+  </div>
+</header>
+
+<nav class="primary">
+  <div class="wrap">
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About Us</a></li>
+      <li><a href="#">Courses</a></li>
+      <li><a href="#">Admission</a></li>
+      <li><a href="#">Contact Us</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="greeting-badge" id="greetingBadge"><span class="dot" aria-hidden="true"></span><span id="greetingText">Welcome to ABC College</span></div>
+    <h1>Welcome to ABC College</h1>
+    <p>ABC College of Technology is a leading institution providing quality education in Computer Science, Information Technology and Management.</p>
+  </div>
+</section>
+
+<section class="courses">
+  <div class="wrap">
+    <h2>Our Courses</h2>
+    <div class="course-grid">
+      <div class="course-card"><span class="course-dot"></span>Bachelor of Computer Applications (BCA)</div>
+      <div class="course-card"><span class="course-dot"></span>Master of Computer Applications (MCA)</div>
+      <div class="course-card"><span class="course-dot"></span>B.Tech Computer Science</div>
+      <div class="course-card"><span class="course-dot"></span>M.Tech Computer Science</div>
+    </div>
+
+    <div class="course-spotlight">
+      <div class="spotlight-info">
+        <span class="spotlight-dot" id="spotlightDot"></span>
+        <div class="spotlight-text">
+          <h4 id="spotlightTitle">Bachelor of Computer Applications (BCA)</h4>
+        </div>
+      </div>
+      <div class="spotlight-controls">
+        <button type="button" id="spotlightPrev" aria-label="Previous course">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke="#0e1330" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <span class="spotlight-count" id="spotlightCount">1 / 4</span>
+        <button type="button" id="spotlightNext" aria-label="Next course">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="#0e1330" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="course-detail">
+  <div class="wrap">
+    <h2 style="font-family:var(--display); font-weight:700; font-size:1.5rem; color:var(--navy-950); margin-bottom:24px;">Course Spotlight: B.Tech Computer Science</h2>
+    <div class="detail-card">
+      <div class="detail-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="11" rx="2" stroke="#fff" stroke-width="1.6"/><path d="M9 20h6M12 16v4" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </div>
+      <div class="detail-info">
+        <h4>B.Tech Computer Science</h4>
+        <p class="summary">A four-year undergraduate program covering programming, algorithms, systems, and modern software engineering practices.</p>
+        <div class="course-extra hidden" id="courseExtra">
+          <p><strong>Duration:</strong> 4 years, 8 semesters.</p>
+          <p><strong>Eligibility:</strong> 10+2 with Physics, Chemistry, and Mathematics.</p>
+          <p><strong>Career paths:</strong> Software Engineer, Data Analyst, Systems Architect.</p>
+        </div>
+        <button type="button" class="toggle-btn" id="courseToggle">Read more</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="fee-estimate">
+  <div class="wrap">
+    <h2 style="font-family:var(--display); font-weight:700; font-size:1.5rem; color:var(--navy-950); margin-bottom:24px;">Estimate Your Course Fee</h2>
+    <div class="estimate-card">
+      <div class="estimate-row">
+        <label><input type="checkbox" class="bill-item" value="45000" data-name="Tuition"> Tuition Fee</label>
+        <span class="price">₹45,000</span>
+      </div>
+      <div class="estimate-row">
+        <label><input type="checkbox" class="bill-item" value="8000" data-name="Hostel"> Hostel Fee</label>
+        <span class="price">₹8,000</span>
+      </div>
+      <div class="estimate-row">
+        <label><input type="checkbox" class="bill-item" value="5000" data-name="Lab"> Lab & Library Fee</label>
+        <span class="price">₹5,000</span>
+      </div>
+      <div class="estimate-total">
+        <span>Estimated total</span>
+        <strong id="billTotal">₹0</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="admission">
+  <div class="wrap">
+    <h2 style="font-family:var(--display); font-weight:700; font-size:1.5rem; color:var(--navy-950); margin-bottom:24px;">Admission Enquiry</h2>
+    <form class="admission-form" id="admissionForm" novalidate>
+      <div class="form-field">
+        <label for="applicantName">Full name</label>
+        <input type="text" id="applicantName" placeholder="Your name">
+        <span class="field-error" id="err-applicantName"></span>
+      </div>
+      <div class="form-field">
+        <label for="applicantEmail">Email</label>
+        <input type="text" id="applicantEmail" placeholder="you@example.com">
+        <span class="field-error" id="err-applicantEmail"></span>
+      </div>
+      <div class="form-field">
+        <label for="applicantMobile">Mobile number</label>
+        <input type="text" id="applicantMobile" placeholder="10-digit number">
+        <span class="field-error" id="err-applicantMobile"></span>
+      </div>
+      <div class="form-field">
+        <label for="applicantAge">Age</label>
+        <input type="text" id="applicantAge" placeholder="Age in years">
+        <span class="field-error" id="err-applicantAge"></span>
+      </div>
+      <div class="form-field full">
+        <label for="preferredDate">Preferred counselling date</label>
+        <input type="date" id="preferredDate">
+        <span class="field-error" id="err-preferredDate"></span>
+      </div>
+      <button type="submit" class="btn-primary">Submit enquiry</button>
+      <p id="admissionMessage"></p>
+    </form>
+  </div>
+</section>
+
+<section class="news">
+  <div class="wrap">
+    <h2>Latest News</h2>
+    <div class="news-list">
+      <div class="news-item"><span class="idx">1.</span><p>Admission open for 2026-27</p></div>
+      <div class="news-item"><span class="idx">2.</span><p>Annual Technical Fest will be held in September</p></div>
+      <div class="news-item"><span class="idx">3.</span><p>Registration open for Internship Program</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 ABC College of Technology</footer>
+
+<section class="impl-notes" id="implementation-notes">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Implementation summary</h2>
+      <p>Changes made to this website for the JavaScript Practical Assignment. All five required features are implemented directly inside this file.</p>
+    </div>
+    <table class="impl-table">
+      <thead>
+        <tr><th>No.</th><th>JavaScript Task</th><th>Where Implemented on the Site</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>Form Validation</td><td>"Admission Enquiry" section. Validates Name, Email, Mobile, Age, and Preferred Counselling Date.</td></tr>
+        <tr><td>2</td><td>Dynamic Greeting</td><td>Hero section. A badge above the heading shows a time-based greeting.</td></tr>
+        <tr><td>3</td><td>Dynamic Bill / Price Calculation</td><td>"Estimate Your Course Fee" section. Checkboxes for Tuition, Hostel, and Lab fees update a running total.</td></tr>
+        <tr><td>4</td><td>Show / Hide Content</td><td>"Course Spotlight" section. A "Read more / Read less" button toggles extended course details.</td></tr>
+        <tr><td>5</td><td>Dynamic Content / Image Change</td><td>"Our Courses" section. A spotlight widget with Previous/Next buttons cycles through all 4 courses.</td></tr>
+      </tbody>
+    </table>
+    <div class="impl-detail">
+      <h4>1. Form Validation — Admission Enquiry Form</h4>
+      <p>Collects applicant name, email, mobile number, age, and preferred counselling date. JavaScript checks for empty fields, a letters-only name, a valid email pattern, a 10-digit mobile number, an age between 15 and 60, and a date that isn't in the past. Shows a success or error message and resets on success.</p>
+    </div>
+    <div class="impl-detail">
+      <h4>2. Dynamic Greeting</h4>
+      <p>Reads the current hour with <code>new Date().getHours()</code> on page load and displays "Good Morning", "Good Afternoon", or "Good Evening" in a badge above the hero heading.</p>
+    </div>
+    <div class="impl-detail">
+      <h4>3. Dynamic Bill / Price Calculation</h4>
+      <p>Tuition Fee (₹45,000), Hostel Fee (₹8,000), and Lab & Library Fee (₹5,000) are selectable checkboxes. A "change" listener recalculates the total instantly as fees are checked or unchecked.</p>
+    </div>
+    <div class="impl-detail">
+      <h4>4. Show / Hide Content</h4>
+      <p>The Course Spotlight card has a "Read more" button that toggles a hidden CSS class to reveal duration, eligibility, and career paths. The label switches between "Read more" and "Read less".</p>
+    </div>
+    <div class="impl-detail">
+      <h4>5. Dynamic Content / Image Change</h4>
+      <p>A course spotlight widget with Previous/Next buttons updates the displayed course name, cycling through BCA, MCA, B.Tech CS, and M.Tech CS.</p>
+    </div>
+    <div class="impl-detail">
+      <h4>Files changed</h4>
+      <ul class="impl-files">
+        <li>abc-college-exact.html — added the five sections/features above with matching CSS and a single JavaScript block before the closing &lt;/body&gt; tag. No existing content was removed.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<script>
+/* 1. Dynamic Greeting */
+(function(){
+  var hour = new Date().getHours();
+  var greeting;
+  if (hour < 12) greeting = "Good Morning! Welcome to ABC College.";
+  else if (hour < 18) greeting = "Good Afternoon! Welcome to ABC College.";
+  else greeting = "Good Evening! Welcome to ABC College.";
+  document.getElementById("greetingText").textContent = greeting;
+})();
+
+/* 5. Course Spotlight — Dynamic Content Change */
+(function(){
+  var courses = [
+    "Bachelor of Computer Applications (BCA)",
+    "Master of Computer Applications (MCA)",
+    "B.Tech Computer Science",
+    "M.Tech Computer Science"
+  ];
+  var current = 0;
+  var titleEl = document.getElementById("spotlightTitle");
+  var countEl = document.getElementById("spotlightCount");
+
+  function render(){
+    titleEl.textContent = courses[current];
+    countEl.textContent = (current + 1) + " / " + courses.length;
+  }
+  document.getElementById("spotlightNext").addEventListener("click", function(){
+    current = (current + 1) % courses.length;
+    render();
+  });
+  document.getElementById("spotlightPrev").addEventListener("click", function(){
+    current = (current - 1 + courses.length) % courses.length;
+    render();
+  });
+  render();
+})();
+
+/* 4. Show / Hide Course Details */
+(function(){
+  var extra = document.getElementById("courseExtra");
+  var toggle = document.getElementById("courseToggle");
+  toggle.addEventListener("click", function(){
+    var isHidden = extra.classList.contains("hidden");
+    if (isHidden){ extra.classList.remove("hidden"); toggle.textContent = "Read less"; }
+    else { extra.classList.add("hidden"); toggle.textContent = "Read more"; }
+  });
+})();
+
+/* 3. Dynamic Fee Calculation */
+(function(){
+  var checkboxes = document.querySelectorAll(".bill-item");
+  var totalEl = document.getElementById("billTotal");
+  function updateTotal(){
+    var total = 0;
+    checkboxes.forEach(function(box){ if (box.checked) total += Number(box.value); });
+    totalEl.textContent = "₹" + total.toLocaleString("en-IN");
+  }
+  checkboxes.forEach(function(box){ box.addEventListener("change", updateTotal); });
+})();
+
+/* 2. Admission Enquiry Form Validation */
+(function(){
+  var form = document.getElementById("admissionForm");
+  var message = document.getElementById("admissionMessage");
+
+  function setError(id, text){ document.getElementById("err-" + id).textContent = text; }
+  function clearErrors(){
+    ["applicantName","applicantEmail","applicantMobile","applicantAge","preferredDate"].forEach(function(id){ setError(id, ""); });
+    message.className = ""; message.textContent = "";
+  }
+
+  form.addEventListener("submit", function(event){
+    event.preventDefault();
+    clearErrors();
+
+    var name = document.getElementById("applicantName").value.trim();
+    var email = document.getElementById("applicantEmail").value.trim();
+    var mobile = document.getElementById("applicantMobile").value.trim();
+    var age = document.getElementById("applicantAge").value.trim();
+    var date = document.getElementById("preferredDate").value;
+    var valid = true;
+
+    if (name === "") { setError("applicantName", "Please enter your name."); valid = false; }
+    else if (!/^[A-Za-z\s]{2,}$/.test(name)) { setError("applicantName", "Name should contain letters only."); valid = false; }
+
+    var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (email === "") { setError("applicantEmail", "Please enter an email address."); valid = false; }
+    else if (!emailPattern.test(email)) { setError("applicantEmail", "Please enter a valid email address."); valid = false; }
+
+    if (mobile === "") { setError("applicantMobile", "Please enter a mobile number."); valid = false; }
+    else if (!/^\d{10}$/.test(mobile)) { setError("applicantMobile", "Enter a valid 10-digit mobile number."); valid = false; }
+
+    if (age === "") { setError("applicantAge", "Please enter age."); valid = false; }
+    else if (isNaN(age) || Number(age) < 15 || Number(age) > 60) { setError("applicantAge", "Enter a valid age (15–60)."); valid = false; }
+
+    if (date === "") { setError("preferredDate", "Please select a date."); valid = false; }
+    else {
+      var today = new Date(); today.setHours(0,0,0,0);
+      var chosen = new Date(date);
+      if (chosen < today) { setError("preferredDate", "Date cannot be in the past."); valid = false; }
+    }
+
+    if (valid){
+      message.className = "success";
+      message.textContent = "Enquiry received! Our admissions team will contact you soon.";
+      form.reset();
+    } else {
+      message.className = "error";
+      message.textContent = "Please fix the highlighted fields and try again.";
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
