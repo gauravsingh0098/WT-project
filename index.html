@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gaurav Singh — Web Technology Projects</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090d16;
+      --surface: #111827;
+      --surface-border: #1f2937;
+      --primary: #38bdf8;
+      --primary-hover: #0ea5e9;
+      --text: #f9fafb;
+      --text-muted: #9ca3af;
+      --accent: #22c55e;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 3rem 1.25rem;
+    }
+
+    header {
+      text-align: center;
+      max-width: 650px;
+      margin-bottom: 2.5rem;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--primary);
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      padding: 5px 14px;
+      border-radius: 9999px;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+
+    p.lead {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 960px;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: 14px;
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--primary);
+      box-shadow: 0 16px 32px -12px rgba(56, 189, 248, 0.15);
+    }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .project-num {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .status-dot {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .project-card h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+
+    .project-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 1.5rem;
+      background: var(--primary);
+      color: #030712;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 0.75rem 1.25rem;
+      border-radius: 8px;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .btn:hover {
+      background: var(--primary-hover);
+      color: #fff;
+    }
+
+    footer {
+      margin-top: 3.5rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="badge">Web Technology Practical</div>
+    <h1>Gaurav Singh</h1>
+    <p class="lead">Interactive JavaScript Projects Showcase</p>
+  </header>
+
+  <main class="grid">
+    <!-- Project 1 -->
+    <article class="project-card">
+      <div>
+        <div class="project-header">
+          <span class="project-num">PROJECT 01</span>
+          <span class="status-dot"><span class="dot"></span> Live</span>
+        </div>
+        <h2>ABC Online Book Store</h2>
+        <p>Book catalogue featuring interactive spotlight navigation, dynamic cart calculations, and complete order enquiry form validation.</p>
+      </div>
+      <a class="btn" href="abc-book-store.html">Launch Project &rarr;</a>
+    </article>
+
+    <!-- Project 2 -->
+    <article class="project-card">
+      <div>
+        <div class="project-header">
+          <span class="project-num">PROJECT 02</span>
+          <span class="status-dot"><span class="dot"></span> Live</span>
+        </div>
+        <h2>ABC College of Technology</h2>
+        <p>Institutional website equipped with course spotlights, instant fee estimation, and an admission enquiry validation system.</p>
+      </div>
+      <a class="btn" href="abc-college-exact.html">Launch Project &rarr;</a>
+    </article>
+
+    <!-- Project 3 -->
+    <article class="project-card">
+      <div>
+        <div class="project-header">
+          <span class="project-num">PROJECT 03</span>
+          <span class="status-dot"><span class="dot"></span> Live</span>
+        </div>
+        <h2>City Care Hospital</h2>
+        <p>Healthcare portal providing department cycling, visit cost calculation, and validated appointment booking forms.</p>
+      </div>
+      <a class="btn" href="city-care-hospital.html">Launch Project &rarr;</a>
+    </article>
+
+    <!-- Project 4 -->
+    <article class="project-card">
+      <div>
+        <div class="project-header">
+          <span class="project-num">PROJECT 04</span>
+          <span class="status-dot"><span class="dot"></span> Live</span>
+        </div>
+        <h2>CS Department Portal</h2>
+        <p>University department directory with faculty spotlight sliders, semester fee estimators, and contact form verification.</p>
+      </div>
+      <a class="btn" href="cs-department.html">Launch Project &rarr;</a>
+    </article>
+
+    <!-- Project 5 -->
+    <article class="project-card">
+      <div>
+        <div class="project-header">
+          <span class="project-num">PROJECT 05</span>
+          <span class="status-dot"><span class="dot"></span> Live</span>
+        </div>
+        <h2>Food Corner Restaurant</h2>
+        <p>Dining site featuring menu item spotlights, interactive order total calculations, and a table booking validation flow.</p>
+      </div>
+      <a class="btn" href="food-corner.html">Launch Project &rarr;</a>
+    </article>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Gaurav Singh &middot; Hosted on GitHub Pages</p>
+  </footer>
+
+</body>
+</html>
