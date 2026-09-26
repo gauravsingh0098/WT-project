@@ -6,17 +6,16 @@
   <title>Gaurav Singh — Web Technology Projects</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #090d16;
-      --surface: #111827;
-      --surface-border: #1f2937;
-      --primary: #38bdf8;
-      --primary-hover: #0ea5e9;
-      --text: #f9fafb;
-      --text-muted: #9ca3af;
-      --accent: #22c55e;
+      --bg: #0b0f19;
+      --card-bg: rgba(22, 30, 49, 0.7);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --accent-blue: #38bdf8;
+      --accent-purple: #818cf8;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
     }
 
     * {
@@ -26,113 +25,151 @@
     }
 
     body {
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       background-color: var(--bg);
-      color: var(--text);
-      line-height: 1.5;
+      color: var(--text-main);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 3rem 1.25rem;
+      padding: 48px 20px;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.12), transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(129, 140, 248, 0.12), transparent 40%);
+    }
+
+    .container {
+      max-width: 900px;
+      width: 100%;
     }
 
     header {
       text-align: center;
-      max-width: 650px;
-      margin-bottom: 2.5rem;
+      margin-bottom: 40px;
     }
 
     .badge {
       display: inline-block;
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--primary);
-      background: rgba(56, 189, 248, 0.1);
-      border: 1px solid rgba(56, 189, 248, 0.25);
-      padding: 5px 14px;
+      padding: 6px 14px;
+      font-size: 0.8rem;
+      font-weight: 600;
       border-radius: 9999px;
-      margin-bottom: 1rem;
+      background: rgba(56, 189, 248, 0.1);
+      color: var(--accent-blue);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      margin-bottom: 16px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
     }
 
     h1 {
-      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-size: 2.5rem;
       font-weight: 800;
       letter-spacing: -0.02em;
-      margin-bottom: 0.75rem;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #ffffff 30%, #94a3b8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    p.lead {
+    .subtitle {
       color: var(--text-muted);
-      font-size: 1rem;
+      font-size: 1.05rem;
+    }
+
+    .user-info-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      padding: 14px 20px;
+      border-radius: 12px;
+      margin-bottom: 32px;
+      backdrop-filter: blur(8px);
+      font-size: 0.9rem;
+    }
+
+    .user-tag strong {
+      color: var(--accent-blue);
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-      width: 100%;
-      max-width: 960px;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 20px;
     }
 
     .project-card {
-      background: var(--surface);
-      border: 1px solid var(--surface-border);
-      border-radius: 14px;
-      padding: 1.75rem;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 24px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      backdrop-filter: blur(8px);
       transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     }
 
     .project-card:hover {
       transform: translateY(-4px);
-      border-color: var(--primary);
-      box-shadow: 0 16px 32px -12px rgba(56, 189, 248, 0.15);
+      border-color: rgba(56, 189, 248, 0.4);
+      box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.5);
     }
 
-    .project-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
-    }
-
-    .project-num {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--primary);
-    }
-
-    .status-dot {
+    .card-header {
       display: flex;
       align-items: center;
-      gap: 6px;
-      font-size: 0.75rem;
-      color: var(--accent);
-      font-weight: 600;
+      gap: 14px;
+      margin-bottom: 12px;
     }
 
-    .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--accent);
+    .icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
     }
 
-    .project-card h2 {
+    .card-title {
       font-size: 1.25rem;
       font-weight: 700;
-      margin-bottom: 0.6rem;
+      color: var(--text-main);
     }
 
-    .project-card p {
-      font-size: 0.9rem;
+    .card-desc {
       color: var(--text-muted);
-      line-height: 1.6;
+      font-size: 0.92rem;
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+
+    .url-box {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 8px 12px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .url-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--accent-blue);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .btn {
@@ -140,108 +177,125 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      margin-top: 1.5rem;
-      background: var(--primary);
-      color: #030712;
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.95rem;
       text-decoration: none;
-      font-weight: 700;
-      font-size: 0.9rem;
-      padding: 0.75rem 1.25rem;
-      border-radius: 8px;
-      transition: background 0.2s ease, transform 0.2s ease;
+      transition: all 0.2s ease;
+      cursor: pointer;
     }
 
-    .btn:hover {
-      background: var(--primary-hover);
-      color: #fff;
+    .btn-launch {
+      background: linear-gradient(135deg, #0284c7, #4f46e5);
+      color: #ffffff;
+      border: none;
+    }
+
+    .btn-launch:hover {
+      opacity: 0.92;
+      box-shadow: 0 4px 18px rgba(79, 70, 229, 0.4);
     }
 
     footer {
-      margin-top: 3.5rem;
+      margin-top: 48px;
       text-align: center;
-      font-size: 0.85rem;
       color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 600px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      h1 {
+        font-size: 1.9rem;
+      }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <div class="badge">Web Technology Practical</div>
-    <h1>Gaurav Singh</h1>
-    <p class="lead">Interactive JavaScript Projects Showcase</p>
-  </header>
+  <div class="container">
+    <header>
+      <span class="badge">Web Technology Portfolio</span>
+      <h1>Project Submissions</h1>
+      <p class="subtitle">Live interactive preview portal for GitHub Pages deployment</p>
+    </header>
 
-  <main class="grid">
-    <!-- Project 1 -->
-    <article class="project-card">
-      <div>
-        <div class="project-header">
-          <span class="project-num">PROJECT 01</span>
-          <span class="status-dot"><span class="dot"></span> Live</span>
+    <div class="user-info-bar">
+      <div class="user-tag">Student: <strong>Gaurav Singh</strong></div>
+      <div class="user-tag">GitHub: <strong>gauravsingh0098</strong></div>
+      <div class="user-tag">Repo: <strong>WT-project</strong></div>
+    </div>
+
+    <div class="grid">
+      <!-- Project 1: University -->
+      <div class="project-card">
+        <div>
+          <div class="card-header">
+            <div class="icon-box">🏛️</div>
+            <div class="card-title">ICFAI University</div>
+          </div>
+          <p class="card-desc">Comprehensive university portal featuring interactive department spotlight, fee calculator, dynamic greeting, and admission validation.</p>
+          <div class="url-box">
+            <span class="url-text">university.html</span>
+          </div>
         </div>
-        <h2>ABC Online Book Store</h2>
-        <p>Book catalogue featuring interactive spotlight navigation, dynamic cart calculations, and complete order enquiry form validation.</p>
+        <a href="university.html" class="btn btn-launch">Open Live Project &rarr;</a>
       </div>
-      <a class="btn" href="abc-book-store.html">Launch Project &rarr;</a>
-    </article>
 
-    <!-- Project 2 -->
-    <article class="project-card">
-      <div>
-        <div class="project-header">
-          <span class="project-num">PROJECT 02</span>
-          <span class="status-dot"><span class="dot"></span> Live</span>
+      <!-- Project 2: CS Department -->
+      <div class="project-card">
+        <div>
+          <div class="card-header">
+            <div class="icon-box">💻</div>
+            <div class="card-title">CS Department</div>
+          </div>
+          <p class="card-desc">Department website showcasing course details explorer, admission enquiry form with regex validation, and fee estimation calculator.</p>
+          <div class="url-box">
+            <span class="url-text">CS Department.html</span>
+          </div>
         </div>
-        <h2>ABC College of Technology</h2>
-        <p>Institutional website equipped with course spotlights, instant fee estimation, and an admission enquiry validation system.</p>
+        <a href="CS%20Department.html" class="btn btn-launch">Open Live Project &rarr;</a>
       </div>
-      <a class="btn" href="abc-college-exact.html">Launch Project &rarr;</a>
-    </article>
 
-    <!-- Project 3 -->
-    <article class="project-card">
-      <div>
-        <div class="project-header">
-          <span class="project-num">PROJECT 03</span>
-          <span class="status-dot"><span class="dot"></span> Live</span>
+      <!-- Project 3: Bookstore -->
+      <div class="project-card">
+        <div>
+          <div class="card-header">
+            <div class="icon-box">📚</div>
+            <div class="card-title">Inkwell &amp; Co. Bookstore</div>
+          </div>
+          <p class="card-desc">Modern e-commerce bookstore with book category filters, interactive cart and wishlist side drawers, and checkout modal flow.</p>
+          <div class="url-box">
+            <span class="url-text">book store.html</span>
+          </div>
         </div>
-        <h2>City Care Hospital</h2>
-        <p>Healthcare portal providing department cycling, visit cost calculation, and validated appointment booking forms.</p>
+        <a href="book%20store.html" class="btn btn-launch">Open Live Project &rarr;</a>
       </div>
-      <a class="btn" href="city-care-hospital.html">Launch Project &rarr;</a>
-    </article>
 
-    <!-- Project 4 -->
-    <article class="project-card">
-      <div>
-        <div class="project-header">
-          <span class="project-num">PROJECT 04</span>
-          <span class="status-dot"><span class="dot"></span> Live</span>
+      <!-- Project 4: Food Corner -->
+      <div class="project-card">
+        <div>
+          <div class="card-header">
+            <div class="icon-box">🍽️</div>
+            <div class="card-title">Food Corner Restaurant</div>
+          </div>
+          <p class="card-desc">Restaurant application with live order pricing estimator, chef spotlight switcher, table reservation form, and menu filters.</p>
+          <div class="url-box">
+            <span class="url-text">food corner.html</span>
+          </div>
         </div>
-        <h2>CS Department Portal</h2>
-        <p>University department directory with faculty spotlight sliders, semester fee estimators, and contact form verification.</p>
+        <a href="food%20corner.html" class="btn btn-launch">Open Live Project &rarr;</a>
       </div>
-      <a class="btn" href="cs-department.html">Launch Project &rarr;</a>
-    </article>
+    </div>
 
-    <!-- Project 5 -->
-    <article class="project-card">
-      <div>
-        <div class="project-header">
-          <span class="project-num">PROJECT 05</span>
-          <span class="status-dot"><span class="dot"></span> Live</span>
-        </div>
-        <h2>Food Corner Restaurant</h2>
-        <p>Dining site featuring menu item spotlights, interactive order total calculations, and a table booking validation flow.</p>
-      </div>
-      <a class="btn" href="food-corner.html">Launch Project &rarr;</a>
-    </article>
-  </main>
-
-  <footer>
-    <p>&copy; 2026 Gaurav Singh &middot; Hosted on GitHub Pages</p>
-  </footer>
+    <footer>
+      © 2026 Gaurav Singh &bull; Hosted with GitHub Pages
+    </footer>
+  </div>
 
 </body>
 </html>
