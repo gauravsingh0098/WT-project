@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SMS Hospital — Advanced Healthcare. Compassionate Care.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy-950:#071427; --navy-900:#0b1f38; --navy-800:#0f2a4a; --navy-700:#153a63;
+  --teal-600:#0d9488; --teal-500:#14b8a6; --teal-100:#e6fbf6;
+  --blue-500:#2563eb; --blue-100:#eaf1ff;
+  --ink:#0f1b2c; --muted:#5b6b7f; --line:rgba(15,42,74,.10);
+  --paper:#ffffff; --bg:#f6f9fc;
+  --sans:'Inter',system-ui,-apple-system,sans-serif;
+  --disp:'Sora',var(--sans);
+  --r-lg:22px; --r-md:14px; --r-sm:9px;
+  --sh-card:0 20px 48px -24px rgba(9,30,66,.22);
+  --sh-soft:0 8px 24px -14px rgba(9,30,66,.18);
+  --ease:cubic-bezier(.22,.7,.3,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none} ul{list-style:none} img{max-width:100%;display:block}
+:focus-visible{outline:2.5px solid var(--teal-500);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+h1,h2,h3,h4{font-family:var(--disp);color:var(--navy-950);letter-spacing:-.01em}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--teal-600);background:var(--teal-100);padding:7px 14px;border-radius:99px}
+.section-head{max-width:640px;margin:0 auto 48px;text-align:center}
+.section-head h2{font-size:clamp(1.7rem,3vw,2.4rem);margin-top:14px}
+.section-head p{color:var(--muted);margin-top:12px;font-size:1.02rem}
+section{padding:96px 0}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:15px 26px;border-radius:11px;font-weight:600;font-size:.95rem;border:none;cursor:pointer;position:relative;overflow:hidden;transition:transform .25s var(--ease),box-shadow .25s var(--ease),background .25s var(--ease)}
+.btn-primary{background:linear-gradient(135deg,var(--teal-600),var(--blue-500));color:#fff;box-shadow:0 14px 30px -12px rgba(13,148,136,.55)}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 20px 36px -14px rgba(13,148,136,.6)}
+.btn-ghost{background:#fff;color:var(--navy-900);border:1.5px solid var(--line)}
+.btn-ghost:hover{border-color:var(--teal-500);transform:translateY(-3px)}
+.btn-emg{background:var(--navy-950);color:#fff}
+.btn-emg:hover{background:#000;transform:translateY(-3px)}
+.ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.5);transform:scale(0);animation:rip .6s var(--ease)}
+@keyframes rip{to{transform:scale(2.6);opacity:0}}
+
+/* header */
+header.site{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.78);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);transition:padding .3s var(--ease),box-shadow .3s var(--ease)}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;padding:20px 28px;transition:padding .3s var(--ease)}
+header.site.scrolled .wrap{padding-top:12px;padding-bottom:12px}
+header.site.scrolled{box-shadow:0 10px 30px -20px rgba(9,30,66,.35)}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-mark{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--teal-600),var(--blue-500));display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.brand-name{font-family:var(--disp);font-size:1.25rem;font-weight:700;color:var(--navy-950)}
+.brand-tag{font-size:.7rem;color:var(--teal-600);font-weight:600;letter-spacing:.03em}
+nav.primary ul{display:flex;gap:32px;font-size:.94rem;font-weight:600}
+nav.primary a{position:relative;padding:6px 0;color:var(--navy-800)}
+nav.primary a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--teal-500);transition:width .25s var(--ease)}
+nav.primary a:hover::after,nav.primary a.active::after{width:100%}
+.header-actions{display:flex;align-items:center;gap:14px}
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px}
+.burger span{width:24px;height:2.4px;background:var(--navy-950);border-radius:2px;transition:transform .3s var(--ease),opacity .3s var(--ease)}
+.burger.open span:nth-child(1){transform:translateY(7.4px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-7.4px) rotate(-45deg)}
+
+/* hero */
+.hero{position:relative;overflow:hidden;padding:88px 0 100px;background:radial-gradient(1100px 560px at 85% -10%,rgba(13,148,136,.14),transparent 60%),radial-gradient(700px 420px at -5% 90%,rgba(37,99,235,.10),transparent 60%),var(--bg)}
+.hero .blob{position:absolute;border-radius:50%;filter:blur(50px);opacity:.5;animation:float 10s ease-in-out infinite}
+.hero .b1{width:280px;height:280px;background:var(--teal-500);top:-60px;right:8%}
+.hero .b2{width:200px;height:200px;background:var(--blue-500);bottom:0;left:-40px;animation-delay:2s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-22px)}}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;position:relative}
+.hero-copy{opacity:0;animation:rise .7s var(--ease) .1s forwards}
+.hero-copy h1{font-size:clamp(2.2rem,4.4vw,3.3rem);line-height:1.1;font-weight:800;margin-top:20px}
+.hero-copy h1 span{background:linear-gradient(135deg,var(--teal-600),var(--blue-500));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-copy p.lede{margin-top:18px;font-size:1.08rem;color:var(--muted);max-width:48ch}
+.hero-actions{margin-top:32px;display:flex;gap:14px;flex-wrap:wrap}
+.hero-stats{margin-top:44px;display:flex;gap:34px;flex-wrap:wrap}
+.hero-stats div strong{display:block;font-family:var(--disp);font-size:1.7rem;color:var(--navy-950)}
+.hero-stats div span{font-size:.82rem;color:var(--muted)}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.hero-art{opacity:0;animation:rise .8s var(--ease) .35s forwards;position:relative}
+.hero-card{background:#fff;border-radius:var(--r-lg);padding:30px;box-shadow:var(--sh-card);border:1px solid var(--line)}
+.hero-card svg{width:100%;height:auto}
+.pulse-line{stroke-dasharray:340;stroke-dashoffset:340;animation:draw 2.6s var(--ease) .6s forwards infinite alternate}
+@keyframes draw{to{stroke-dashoffset:0}}
+.hero-caption{display:flex;justify-content:space-between;align-items:center;margin-top:16px;font-size:.85rem;color:var(--muted)}
+.hero-caption strong{color:var(--teal-600)}
+.float-card{position:absolute;background:rgba(255,255,255,.9);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:14px;padding:12px 16px;box-shadow:var(--sh-soft);font-size:.82rem;font-weight:600;animation:bob 5s ease-in-out infinite}
+.fc1{top:-18px;left:-28px;animation-delay:.3s}
+.fc2{bottom:12px;right:-24px;animation-delay:1.2s}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+/* about */
+.about .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;align-items:center}
+.about-visual{position:relative}
+.about-card{background:linear-gradient(135deg,var(--navy-900),var(--navy-700));border-radius:var(--r-lg);padding:40px;color:#fff;box-shadow:var(--sh-card)}
+.about-card .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:24px}
+.about-card .stat strong{font-family:var(--disp);font-size:1.9rem;display:block}
+.about-card .stat span{font-size:.78rem;opacity:.8}
+.about-copy .eyebrow{margin-bottom:14px}
+.about-copy h2{font-size:clamp(1.6rem,3vw,2.2rem);margin-bottom:16px}
+.about-copy p{color:var(--muted);margin-bottom:14px}
+.about-list{margin-top:18px;display:grid;gap:12px}
+.about-list li{display:flex;gap:10px;align-items:flex-start;font-weight:500;font-size:.96rem}
+.about-list svg{flex-shrink:0;margin-top:2px}
+
+/* department cards */
+.dept-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px}
+.dept-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-md);padding:30px 26px;box-shadow:var(--sh-soft);transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+.dept-card:hover{transform:translateY(-8px);box-shadow:var(--sh-card)}
+.dept-icon{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,var(--teal-600),var(--blue-500));display:flex;align-items:center;justify-content:center;margin-bottom:18px;transition:transform .3s var(--ease)}
+.dept-card:hover .dept-icon{transform:rotate(-6deg) scale(1.06)}
+.dept-card h3{font-size:1.12rem;margin-bottom:8px}
+.dept-card p{color:var(--muted);font-size:.92rem;margin-bottom:14px}
+.dept-learn{font-size:.85rem;font-weight:700;color:var(--teal-600)}
+
+.spotlight{margin-top:44px;background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:32px;box-shadow:var(--sh-soft);display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.spot-icon{width:56px;height:56px;border-radius:14px;background:var(--navy-900);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.spot-body{flex:1;min-width:200px}
+.spot-body h4{font-size:1.05rem}
+.spot-body p{color:var(--muted);font-size:.9rem;margin-top:4px}
+.spot-nav{display:flex;align-items:center;gap:12px}
+.spot-nav button{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--line);background:#fff;cursor:pointer;font-size:1rem;transition:background .2s,border-color .2s}
+.spot-nav button:hover{background:var(--teal-100);border-color:var(--teal-500)}
+.spot-count{font-size:.82rem;color:var(--muted);font-weight:600}
+
+/* doctors */
+.doc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:24px}
+.doc-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-md);padding:26px;box-shadow:var(--sh-soft);text-align:center;transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+.doc-card:hover{transform:translateY(-6px);box-shadow:var(--sh-card)}
+.doc-avatar{width:76px;height:76px;border-radius:50%;margin:0 auto 16px;background:linear-gradient(135deg,var(--teal-500),var(--blue-500));display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--disp);font-weight:700;font-size:1.3rem}
+.doc-card h3{font-size:1.05rem}
+.doc-card .spec{color:var(--teal-600);font-weight:600;font-size:.86rem;margin-top:2px}
+.doc-card .exp{color:var(--muted);font-size:.85rem;margin-top:8px}
+.doc-details{margin-top:12px;font-size:.85rem;color:var(--muted);text-align:left;border-top:1px solid var(--line);padding-top:12px}
+.doc-details.hidden{display:none}
+.toggle-btn{margin-top:14px;background:none;border:none;color:var(--teal-600);font-weight:700;cursor:pointer;font-size:.88rem}
+
+/* appointment */
+.appointment{background:var(--navy-950);color:#fff}
+.appointment .section-head h2,.appointment .section-head p{color:#fff}
+.appointment .section-head p{opacity:.75}
+.appt-card{max-width:640px;margin:0 auto;background:#fff;border-radius:var(--r-lg);padding:40px;color:var(--ink);box-shadow:var(--sh-card)}
+.field{margin-bottom:18px}
+.field label{display:block;font-size:.85rem;font-weight:600;margin-bottom:7px}
+.field input{width:100%;padding:13px 15px;border-radius:10px;border:1.5px solid var(--line);font-size:.95rem;font-family:var(--sans);transition:border-color .2s,box-shadow .2s}
+.field input:focus{border-color:var(--teal-500);box-shadow:0 0 0 4px var(--teal-100);outline:none}
+.err{color:#dc2626;font-size:.8rem;margin-top:5px;min-height:1em}
+#appointmentMessage{margin-top:6px;font-weight:600;text-align:center;padding:12px;border-radius:10px}
+#appointmentMessage.success{background:var(--teal-100);color:var(--teal-600);animation:pop .45s var(--ease)}
+#appointmentMessage.error{background:#fee2e2;color:#dc2626;animation:shake .4s}
+@keyframes pop{from{transform:scale(.94);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes shake{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+
+/* cost calculator */
+.cost-card{max-width:520px;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:34px;box-shadow:var(--sh-soft)}
+.cost-item{display:flex;align-items:center;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--line);font-weight:600}
+.cost-item label{display:flex;align-items:center;gap:12px;cursor:pointer}
+.cost-item input{width:18px;height:18px;accent-color:var(--teal-600)}
+.cost-total{display:flex;justify-content:space-between;align-items:center;margin-top:22px;font-family:var(--disp);font-size:1.5rem;font-weight:700;color:var(--navy-950)}
+
+/* emergency */
+.emergency{background:linear-gradient(135deg,var(--navy-950),var(--navy-800));color:#fff;text-align:center}
+.emergency h2{color:#fff;font-size:clamp(1.7rem,3.4vw,2.3rem)}
+.emergency p{color:rgba(255,255,255,.75);max-width:520px;margin:14px auto 30px}
+.emg-icon{width:64px;height:64px;margin:0 auto 20px;border-radius:50%;background:rgba(220,38,38,.18);display:flex;align-items:center;justify-content:center;animation:pulseGlow 2s ease-in-out infinite}
+@keyframes pulseGlow{0%,100%{box-shadow:0 0 0 0 rgba(220,38,38,.4)}50%{box-shadow:0 0 0 14px rgba(220,38,38,0)}}
+.emg-number{display:inline-block;margin-top:20px;font-family:var(--disp);font-size:1.6rem;font-weight:700}
+
+/* footer */
+footer{background:var(--navy-950);color:rgba(255,255,255,.8);position:relative;overflow:hidden}
+footer::before{content:"";position:absolute;inset:0;background:radial-gradient(600px 300px at 80% 0%,rgba(13,148,136,.18),transparent 60%);pointer-events:none}
+footer .wrap{position:relative;padding:70px 28px 26px}
+.footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1.1fr;gap:40px}
+.footer-grid h4{color:#fff;font-size:1rem;margin-bottom:16px}
+.footer-brand p{font-size:.9rem;margin-top:10px;opacity:.75}
+.footer-grid ul li{margin-bottom:10px;font-size:.9rem}
+.footer-grid ul a:hover{color:var(--teal-500)}
+.socials{display:flex;gap:10px;margin-top:16px}
+.socials a{width:34px;height:34px;border-radius:9px;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;transition:background .2s}
+.socials a:hover{background:var(--teal-600)}
+.footer-bottom{margin-top:50px;padding-top:22px;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:.82rem;opacity:.65}
+
+/* reveal */
+section.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+section.reveal.visible{opacity:1;transform:translateY(0)}
+.dept-card,.doc-card{opacity:0;transform:translateY(18px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.reveal.visible .dept-card,.reveal.visible .doc-card{opacity:1;transform:translateY(0)}
+.reveal.visible .dept-card:nth-child(1){transition-delay:.05s}
+.reveal.visible .dept-card:nth-child(2){transition-delay:.1s}
+.reveal.visible .dept-card:nth-child(3){transition-delay:.15s}
+.reveal.visible .dept-card:nth-child(4){transition-delay:.2s}
+.reveal.visible .dept-card:nth-child(5){transition-delay:.25s}
+.reveal.visible .doc-card:nth-child(1){transition-delay:.05s}
+.reveal.visible .doc-card:nth-child(2){transition-delay:.1s}
+.reveal.visible .doc-card:nth-child(3){transition-delay:.15s}
+
+.back-top{position:fixed;right:22px;bottom:22px;width:48px;height:48px;border-radius:50%;border:none;background:linear-gradient(135deg,var(--teal-600),var(--blue-500));color:#fff;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 14px 30px -12px rgba(9,30,66,.4);opacity:0;transform:translateY(14px);pointer-events:none;transition:opacity .3s var(--ease),transform .3s var(--ease);z-index:55}
+.back-top.visible{opacity:1;transform:translateY(0);pointer-events:auto}
+
+@media (max-width:900px){
+  .hero .wrap,.about .wrap{grid-template-columns:1fr}
+  .hero-art{order:-1}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  nav.primary{position:fixed;top:0;right:0;height:100vh;width:min(78vw,320px);background:var(--navy-950);transform:translateX(100%);transition:transform .35s var(--ease);z-index:70;padding:100px 30px 30px}
+  nav.primary.open{transform:translateX(0)}
+  nav.primary ul{flex-direction:column;gap:22px}
+  nav.primary a{color:#fff;font-size:1.05rem}
+  .burger{display:flex}
+  .header-actions .btn-primary{display:none}
+  section{padding:70px 0}
+}
+</style>
+</head>
+<body>
+
+<header class="site" id="siteHeader">
+  <div class="wrap">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 4v16M4 12h16" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg></div>
+      <div><div class="brand-name">SMS Hospital</div><div class="brand-tag">24/7 Healthcare • Trusted Medical Care</div></div>
+    </div>
+    <nav class="primary" id="primaryNav" aria-label="Primary">
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Departments</a></li>
+        <li><a href="#doctors">Doctors</a></li>
+        <li><a href="#appointment">Appointment</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="btn btn-primary" href="#appointment">Book Appointment</a>
+      <button class="burger" id="burger" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="home">
+  <div class="blob b1"></div><div class="blob b2"></div>
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="eyebrow" id="greetingBadge"><span id="greetingText">Welcome to SMS Hospital</span></span>
+      <h1>Advanced Healthcare. <span>Compassionate Care.</span></h1>
+      <p class="lede">SMS Hospital brings together experienced doctors, modern facilities, and round-the-clock attention — so every visit, planned or urgent, gets the same steady care.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#appointment">Book an Appointment</a>
+        <a class="btn btn-ghost" href="#services">Explore Services</a>
+        <a class="btn btn-emg" href="tel:9876543210">Emergency: 98765 43210</a>
+      </div>
+      <div class="hero-stats">
+        <div><strong>24/7</strong><span>Emergency Care</span></div>
+        <div><strong>50+</strong><span>Experienced Doctors</span></div>
+        <div><strong>1000+</strong><span>Patients Cared For Yearly</span></div>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="float-card fc1">🏥 Advanced Facilities</div>
+      <div class="hero-card">
+        <svg viewBox="0 0 320 120" fill="none"><path d="M0 60 H70 L88 20 L108 100 L128 40 L142 60 H320" stroke="#0d9488" stroke-width="3" class="pulse-line" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="hero-caption"><span>Live vitals monitoring</span><strong>Stable</strong></div>
+      </div>
+      <div class="float-card fc2">❤️ Patient-Focused Care</div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="about-visual">
+      <div class="about-card">
+        <span class="eyebrow" style="background:rgba(255,255,255,.12);color:#fff">About SMS Hospital</span>
+        <h3 style="color:#fff;margin-top:16px;font-size:1.3rem">Modern facilities, familiar faces</h3>
+        <div class="stat-grid">
+          <div class="stat"><strong>24/7</strong><span>Emergency Response</span></div>
+          <div class="stat"><strong>5</strong><span>Core Departments</span></div>
+          <div class="stat"><strong>15+</strong><span>Years of Trusted Care</span></div>
+          <div class="stat"><strong>98%</strong><span>Patient Satisfaction</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="about-copy">
+      <span class="eyebrow">About Us</span>
+      <h2>Where advanced medicine meets genuine attention</h2>
+      <p>SMS Hospital was built to close the gap between advanced medicine and real, human attention. Our teams work across cardiology, neurology, orthopedics, general medicine, and pediatrics, with equipment and protocols kept current so decisions aren't slowed down by outdated tools.</p>
+      <p>Whether it's a routine check-up or something that can't wait, the same standard applies — clear communication, careful diagnosis, and a plan you actually understand before you leave.</p>
+      <ul class="about-list">
+        <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#0d9488" stroke-width="1.4"/><path d="M6 10l2.5 2.5L14 7" stroke="#0d9488" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Experienced doctors across five departments</li>
+        <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#0d9488" stroke-width="1.4"/><path d="M6 10l2.5 2.5L14 7" stroke="#0d9488" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Trained nursing and support staff</li>
+        <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#0d9488" stroke-width="1.4"/><path d="M6 10l2.5 2.5L14 7" stroke="#0d9488" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Modern diagnostic and treatment facilities</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="departments reveal" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Departments</span>
+      <h2>Our Departments</h2>
+      <p>Five core departments, each staffed by specialists who treat the person in front of them, not just the chart.</p>
+    </div>
+    <div class="dept-grid">
+      <div class="dept-card"><div class="dept-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M20 8.5c0 5-8 10.5-8 10.5S4 13.5 4 8.5a4.5 4.5 0 018-2.6A4.5 4.5 0 0120 8.5z" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Cardiology</h3><p>Heart health screening, diagnosis, and ongoing care.</p><span class="dept-learn">Learn More →</span></div>
+      <div class="dept-card"><div class="dept-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M8 5c-2 0-3.5 1.6-3.5 3.6 0 1 .4 1.9 1 2.5-.6.6-1 1.5-1 2.5C4.5 15.6 6 17 8 17M16 5c2 0 3.5 1.6 3.5 3.6 0 1-.4 1.9-1 2.5.6.6 1 1.5 1 2.5 0 2-1.5 3.4-3.5 3.4M12 5v14" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg></div><h3>Neurology</h3><p>Care for the brain, spine, and nervous system.</p><span class="dept-learn">Learn More →</span></div>
+      <div class="dept-card"><div class="dept-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 18l4-10 2 5 2-5 4 10M6 18h12" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Orthopedics</h3><p>Bone, joint, and muscle treatment and recovery.</p><span class="dept-learn">Learn More →</span></div>
+      <div class="dept-card"><div class="dept-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="5" y="4" width="14" height="16" rx="2" stroke="#fff" stroke-width="1.6"/><path d="M9 9h6M9 13h6M9 17h3" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg></div><h3>General Medicine</h3><p>Everyday health concerns and preventive checkups.</p><span class="dept-learn">Learn More →</span></div>
+      <div class="dept-card"><div class="dept-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3" stroke="#fff" stroke-width="1.6"/><path d="M6 20c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg></div><h3>Pediatrics</h3><p>Gentle, attentive care for infants and children.</p><span class="dept-learn">Learn More →</span></div>
+    </div>
+
+    <div class="spotlight">
+      <div class="spot-icon" id="spotlightIcon"></div>
+      <div class="spot-body"><h4 id="spotlightTitle"></h4><p id="spotlightDesc"></p></div>
+      <div class="spot-nav">
+        <button id="spotlightPrev" aria-label="Previous department">‹</button>
+        <span class="spot-count" id="spotlightCount"></span>
+        <button id="spotlightNext" aria-label="Next department">›</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="doctors reveal" id="doctors">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Our Team</span>
+      <h2>Meet Our Specialists</h2>
+      <p>Board-certified doctors dedicated to careful diagnosis and clear communication.</p>
+    </div>
+    <div class="doc-grid">
+      <div class="doc-card">
+        <div class="doc-avatar">GS</div>
+        <h3>Dr. Gaurav Singh</h3>
+        <div class="spec">Cardiologist</div>
+        <div class="exp">12 years experience</div>
+        <button class="toggle-btn" id="doctorToggle">Read more</button>
+        <div class="doc-details hidden" id="doctorDetails">
+          <p>Specializes in interventional cardiology and preventive heart care. Available Mon–Fri, 9am–5pm.</p>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-avatar">AS</div>
+        <h3>Dr. Abhishek Sharma</h3>
+        <div class="spec">Neurologist</div>
+        <div class="exp">9 years experience</div>
+        <button class="toggle-btn">View Profile</button>
+      </div>
+      <div class="doc-card">
+        <div class="doc-avatar">MK</div>
+        <h3>Dr. Manish Kumar</h3>
+        <div class="spec">Pediatrician</div>
+        <div class="exp">7 years experience</div>
+        <button class="toggle-btn">View Profile</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="appointment reveal" id="appointment">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow" style="background:rgba(20,184,166,.15)">Book a Visit</span>
+      <h2>Book an Appointment</h2>
+      <p>Fill in your details and our team will confirm shortly.</p>
+    </div>
+    <form class="appt-card" id="appointmentForm" novalidate>
+      <div class="field"><label for="patientName">Patient Name</label><input type="text" id="patientName" name="patientName"><div class="err" id="err-patientName"></div></div>
+      <div class="field"><label for="patientEmail">Email</label><input type="email" id="patientEmail" name="patientEmail"><div class="err" id="err-patientEmail"></div></div>
+      <div class="field"><label for="patientMobile">Mobile Number</label><input type="tel" id="patientMobile" name="patientMobile"><div class="err" id="err-patientMobile"></div></div>
+      <div class="field"><label for="patientAge">Age</label><input type="number" id="patientAge" name="patientAge"><div class="err" id="err-patientAge"></div></div>
+      <div class="field"><label for="appointmentDate">Appointment Date</label><input type="date" id="appointmentDate" name="appointmentDate"><div class="err" id="err-appointmentDate"></div></div>
+      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Confirm Appointment</button>
+      <div id="appointmentMessage"></div>
+    </form>
+  </div>
+</section>
+
+<section class="reveal" id="bill-estimate">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Cost Estimator</span>
+      <h2>Estimate Your Visit Cost</h2>
+      <p>Select the services you expect to need for a quick estimate.</p>
+    </div>
+    <div class="cost-card">
+      <div class="cost-item"><label><input type="checkbox" class="bill-item" value="500"> Consultation</label><span>₹500</span></div>
+      <div class="cost-item"><label><input type="checkbox" class="bill-item" value="300"> Blood Test</label><span>₹300</span></div>
+      <div class="cost-item"><label><input type="checkbox" class="bill-item" value="700"> X-Ray</label><span>₹700</span></div>
+      <div class="cost-total"><span>Total</span><span id="billTotal">₹0</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="emergency reveal">
+  <div class="wrap">
+    <div class="emg-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 2v20M2 12h20" stroke="#f87171" stroke-width="2.4" stroke-linecap="round"/></svg></div>
+    <h2>Need Emergency Care?</h2>
+    <p>24/7 Emergency Services — our team is ready around the clock for urgent and critical care.</p>
+    <a class="btn btn-emg emg-number" href="tel:9876543210">📞 98765 43210</a>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h4>SMS Hospital</h4>
+        <p>Modern healthcare facilities with experienced doctors and trained medical staff, open every day of the year.</p>
+        <div class="socials">
+          <a href="#" aria-label="Facebook">f</a><a href="#" aria-label="Twitter">x</a><a href="#" aria-label="Instagram">in</a>
+        </div>
+      </div>
+      <div><h4>Quick Links</h4><ul><li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#doctors">Doctors</a></li><li><a href="#appointment">Appointment</a></li></ul></div>
+      <div><h4>Departments</h4><ul><li><a href="#services">Cardiology</a></li><li><a href="#services">Neurology</a></li><li><a href="#services">Orthopedics</a></li><li><a href="#services">Pediatrics</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li>Emergency: <a href="tel:9876543210">98765 43210</a></li><li><a href="mailto:care@smshospital.example">care@smshospital.example</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© Gaurav Singh</span>
+      <span>Built for quality care, every day.</span>
+    </div>
+  </div>
+</footer>
+
+<button class="back-top" id="backTop" aria-label="Back to top">↑</button>
+
+<script>
+(function(){
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', function(){
+    header.classList.toggle('scrolled', window.scrollY > 12);
+    document.getElementById('backTop').classList.toggle('visible', window.scrollY > 480);
+  }, {passive:true});
+
+  var burger = document.getElementById('burger'), nav = document.getElementById('primaryNav');
+  burger.addEventListener('click', function(){
+    var open = nav.classList.toggle('open');
+    burger.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  nav.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ nav.classList.remove('open'); burger.classList.remove('open'); }); });
+
+  document.getElementById('backTop').addEventListener('click', function(){
+    window.scrollTo({top:0, behavior: reduceMotion ? 'auto' : 'smooth'});
+  });
+
+  if (!reduceMotion && 'IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, {threshold:.12, rootMargin:'0px 0px -60px 0px'});
+    document.querySelectorAll('section.reveal').forEach(function(s){ io.observe(s); });
+  } else {
+    document.querySelectorAll('section.reveal').forEach(function(s){ s.classList.add('visible'); });
+  }
+
+  document.addEventListener('click', function(e){
+    if (reduceMotion) return;
+    var t = e.target.closest('.btn');
+    if (!t) return;
+    var rect = t.getBoundingClientRect();
+    var r = document.createElement('span');
+    var size = Math.max(rect.width, rect.height);
+    r.className = 'ripple';
+    r.style.width = r.style.height = size + 'px';
+    r.style.left = (e.clientX - rect.left - size/2) + 'px';
+    r.style.top = (e.clientY - rect.top - size/2) + 'px';
+    t.appendChild(r);
+    setTimeout(function(){ r.remove(); }, 650);
+  });
+})();
+</script>
+
+<script>
+/* 1. Dynamic Greeting */
+(function(){
+  var hour = new Date().getHours();
+  var greeting;
+  if (hour < 12) greeting = "Good Morning! Welcome to SMS Hospital.";
+  else if (hour < 18) greeting = "Good Afternoon! Welcome to SMS Hospital.";
+  else greeting = "Good Evening! Welcome to SMS Hospital.";
+  document.getElementById("greetingText").textContent = greeting;
+})();
+
+/* 2. Department Spotlight — Prev/Next */
+(function(){
+  var departments = [
+    {name:"Cardiology", desc:"Heart health screening, diagnosis, and ongoing care.", icon:'<svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M20 8.5c0 5-8 10.5-8 10.5S4 13.5 4 8.5a4.5 4.5 0 018-2.6A4.5 4.5 0 0120 8.5z" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>'},
+    {name:"Neurology", desc:"Care for the brain, spine, and nervous system.", icon:'<svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M8 5c-2 0-3.5 1.6-3.5 3.6 0 1 .4 1.9 1 2.5-.6.6-1 1.5-1 2.5C4.5 15.6 6 17 8 17M16 5c2 0 3.5 1.6 3.5 3.6 0 1-.4 1.9-1 2.5.6.6 1 1.5 1 2.5 0 2-1.5 3.4-3.5 3.4M12 5v14" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg>'},
+    {name:"Orthopedics", desc:"Bone, joint, and muscle treatment and recovery.", icon:'<svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M6 18l4-10 2 5 2-5 4 10M6 18h12" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>'},
+    {name:"General Medicine", desc:"Everyday health concerns and preventive checkups.", icon:'<svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="5" y="4" width="14" height="16" rx="2" stroke="#fff" stroke-width="1.6"/><path d="M9 9h6M9 13h6M9 17h3" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg>'},
+    {name:"Pediatrics", desc:"Gentle, attentive care for infants and children.", icon:'<svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3" stroke="#fff" stroke-width="1.6"/><path d="M6 20c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg>'}
+  ];
+  var current = 0;
+  var titleEl = document.getElementById("spotlightTitle"), descEl = document.getElementById("spotlightDesc"),
+      iconEl = document.getElementById("spotlightIcon"), countEl = document.getElementById("spotlightCount");
+  function render(){
+    var d = departments[current];
+    titleEl.textContent = d.name; descEl.textContent = d.desc; iconEl.innerHTML = d.icon;
+    countEl.textContent = (current+1) + " / " + departments.length;
+  }
+  document.getElementById("spotlightNext").addEventListener("click", function(){ current=(current+1)%departments.length; render(); });
+  document.getElementById("spotlightPrev").addEventListener("click", function(){ current=(current-1+departments.length)%departments.length; render(); });
+  render();
+})();
+
+/* 3. Show/Hide Doctor Details */
+(function(){
+  var details = document.getElementById("doctorDetails"), toggle = document.getElementById("doctorToggle");
+  toggle.addEventListener("click", function(){
+    var hidden = details.classList.contains("hidden");
+    if (hidden){ details.classList.remove("hidden"); toggle.textContent = "Read less"; }
+    else { details.classList.add("hidden"); toggle.textContent = "Read more"; }
+  });
+})();
+
+/* 4. Dynamic Bill / Price Calculation (animated total) */
+(function(){
+  var checkboxes = document.querySelectorAll(".bill-item"), totalEl = document.getElementById("billTotal");
+  var shown = 0;
+  function animateTo(target){
+    var start = shown, diff = target - start, steps = 14, i = 0;
+    var id = setInterval(function(){
+      i++; shown = Math.round(start + diff*(i/steps));
+      totalEl.textContent = "₹" + shown;
+      if (i >= steps){ shown = target; totalEl.textContent = "₹" + target; clearInterval(id); }
+    }, 16);
+  }
+  function updateTotal(){
+    var total = 0;
+    checkboxes.forEach(function(box){ if (box.checked) total += Number(box.value); });
+    animateTo(total);
+  }
+  checkboxes.forEach(function(box){ box.addEventListener("change", updateTotal); });
+})();
+
+/* 5. Appointment Form Validation */
+(function(){
+  var form = document.getElementById("appointmentForm"), message = document.getElementById("appointmentMessage");
+  function setError(id, text){ document.getElementById("err-" + id).textContent = text; }
+  function clearErrors(){
+    ["patientName","patientEmail","patientMobile","patientAge","appointmentDate"].forEach(function(id){ setError(id, ""); });
+    message.className = ""; message.textContent = "";
+  }
+  form.addEventListener("submit", function(event){
+    event.preventDefault(); clearErrors();
+    var name = document.getElementById("patientName").value.trim();
+    var email = document.getElementById("patientEmail").value.trim();
+    var mobile = document.getElementById("patientMobile").value.trim();
+    var age = document.getElementById("patientAge").value.trim();
+    var date = document.getElementById("appointmentDate").value;
+    var valid = true;
+    if (name === "") { setError("patientName", "Please enter the patient's name."); valid = false; }
+    else if (!/^[A-Za-z\s]{2,}$/.test(name)) { setError("patientName", "Name should contain letters only."); valid = false; }
+    var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (email === "") { setError("patientEmail", "Please enter an email address."); valid = false; }
+    else if (!emailPattern.test(email)) { setError("patientEmail", "Please enter a valid email address."); valid = false; }
+    if (mobile === "") { setError("patientMobile", "Please enter a mobile number."); valid = false; }
+    else if (!/^\d{10}$/.test(mobile)) { setError("patientMobile", "Enter a valid 10-digit mobile number."); valid = false; }
+    if (age === "") { setError("patientAge", "Please enter age."); valid = false; }
+    else if (isNaN(age) || Number(age) < 1 || Number(age) > 120) { setError("patientAge", "Enter a valid age (1–120)."); valid = false; }
+    if (date === "") { setError("appointmentDate", "Please select a date."); valid = false; }
+    else {
+      var today = new Date(); today.setHours(0,0,0,0);
+      var chosen = new Date(date);
+      if (chosen < today) { setError("appointmentDate", "Date cannot be in the past."); valid = false; }
+    }
+    if (valid) {
+      message.className = "success";
+      message.textContent = "✓ Appointment request received! Our team will confirm shortly.";
+      form.reset();
+    } else {
+      message.className = "error";
+      message.textContent = "Please fix the highlighted fields and try again.";
+    }
+  });
+})();
+</script>
+</body>
+</html>
