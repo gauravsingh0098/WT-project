@@ -1,637 +1,272 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Web Projects Portal — Gaurav Singh</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg-dark: #090d16;
-    --card-dark: #111726;
-    --card-border: rgba(255, 255, 255, 0.08);
-    --text-main: #f1f5f9;
-    --text-muted: #94a3b8;
-    --primary: #6366f1;
-    --primary-glow: rgba(99, 102, 241, 0.25);
-    --cyan: #06b6d4;
-    --amber: #f59e0b;
-    --emerald: #10b981;
-    --rose: #f43f5e;
-    --sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-    --display: 'Space Grotesk', var(--sans);
-    --radius-lg: 20px;
-    --radius-md: 12px;
-    --ease: cubic-bezier(0.16, 1, 0.3, 1);
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Projects Showcase — Gaurav Singh</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0c101b;
+      --card-bg: #141b2d;
+      --card-border: #1e2942;
+      --badge-bg: #0d1424;
+      --badge-text: #4a6fa5;
+      --text-main: #ffffff;
+      --text-muted: #8e9bb2;
+      --btn-grad-start: #3b82f6;
+      --btn-grad-end: #6366f1;
+      --btn-hover: #4f46e5;
+    }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg);
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 60px 20px 30px;
+    }
 
-  body {
-    font-family: var(--sans);
-    background-color: var(--bg-dark);
-    color: var(--text-main);
-    line-height: 1.6;
-    overflow-x: hidden;
-    min-height: 100vh;
-  }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+    }
 
-  a { color: inherit; text-decoration: none; }
-  ul { list-style: none; }
+    /* Grid Layout */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-bottom: 50px;
+    }
 
-  .wrap {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
+    /* Card Styling */
+    .project-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 32px 28px 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
 
-  /* ---------------- Header ---------------- */
-  header.site-header {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    background: rgba(9, 13, 22, 0.82);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--card-border);
-  }
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: #334771;
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35);
+    }
 
-  header .bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 0;
-  }
+    /* Card Top / Header */
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
 
-  .brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
+    .card-icon {
+      font-size: 1.4rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 10px;
+    }
 
-  .brand-badge {
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    background: linear-gradient(135deg, var(--primary), var(--cyan));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--display);
-    font-weight: 700;
-    color: #fff;
-    font-size: 1.1rem;
-    box-shadow: 0 8px 20px var(--primary-glow);
-  }
+    .card-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--text-main);
+    }
 
-  .brand-title {
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: 1.1rem;
-    letter-spacing: -0.01em;
-  }
+    /* Card Body */
+    .card-description {
+      color: var(--text-muted);
+      font-size: 0.96rem;
+      line-height: 1.6;
+      margin-bottom: 22px;
+      min-height: 72px;
+    }
 
-  .brand-subtitle {
-    font-size: 0.75rem;
-    color: var(--cyan);
-  }
+    /* Path Badge */
+    .file-badge {
+      display: block;
+      width: 100%;
+      background: var(--badge-bg);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 9px;
+      padding: 12px 16px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.88rem;
+      color: var(--badge-text);
+      margin-bottom: 18px;
+    }
 
-  nav.nav-links {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--text-muted);
-  }
+    /* Action Button */
+    .open-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 14px 20px;
+      background: linear-gradient(90deg, var(--btn-grad-start), var(--btn-grad-end));
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border-radius: 10px;
+      transition: filter 0.2s ease, transform 0.2s ease;
+    }
 
-  nav.nav-links a:hover {
-    color: var(--text-main);
-  }
+    .open-btn:hover {
+      filter: brightness(1.12);
+      transform: translateY(-1px);
+    }
 
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 10px 20px;
-    border-radius: 999px;
-    font-size: 0.88rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.25s var(--ease);
-    border: none;
-  }
+    /* Footer */
+    footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      padding-top: 20px;
+    }
 
-  .btn-primary {
-    background: var(--primary);
-    color: #fff;
-    box-shadow: 0 10px 25px -8px var(--primary);
-  }
+    footer a {
+      color: var(--text-muted);
+      text-decoration: underline;
+    }
 
-  .btn-primary:hover {
-    background: #4f46e5;
-    transform: translateY(-2px);
-    box-shadow: 0 14px 28px -6px var(--primary);
-  }
+    /* Responsive */
+    @media (max-width: 768px) {
+      .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
 
-  .btn-outline {
-    background: transparent;
-    border: 1px solid var(--card-border);
-    color: var(--text-main);
-  }
+      body {
+        padding: 30px 16px;
+      }
 
-  .btn-outline:hover {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.2);
-  }
-
-  /* ---------------- Hero Section ---------------- */
-  .hero {
-    position: relative;
-    padding: 90px 0 60px;
-    text-align: center;
-    overflow: hidden;
-  }
-
-  .hero::before {
-    content: "";
-    position: absolute;
-    top: -150px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
-    z-index: 0;
-    pointer-events: none;
-  }
-
-  .hero-tag {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 16px;
-    border-radius: 999px;
-    background: rgba(99, 102, 241, 0.12);
-    border: 1px solid rgba(99, 102, 241, 0.25);
-    color: #a5b4fc;
-    font-size: 0.8rem;
-    font-weight: 600;
-    margin-bottom: 24px;
-    z-index: 1;
-  }
-
-  .hero-tag .dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--cyan);
-    box-shadow: 0 0 10px var(--cyan);
-  }
-
-  .hero h1 {
-    position: relative;
-    font-family: var(--display);
-    font-size: clamp(2.2rem, 4.5vw, 3.8rem);
-    font-weight: 700;
-    line-height: 1.15;
-    letter-spacing: -0.02em;
-    margin-bottom: 20px;
-    z-index: 1;
-  }
-
-  .hero h1 span {
-    background: linear-gradient(135deg, #a5b4fc, #38bdf8);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .hero p.lead {
-    position: relative;
-    font-size: 1.1rem;
-    color: var(--text-muted);
-    max-width: 650px;
-    margin: 0 auto 36px;
-    z-index: 1;
-  }
-
-  .stats-row {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    margin-top: 40px;
-    padding-top: 30px;
-    border-top: 1px solid var(--card-border);
-    flex-wrap: wrap;
-    z-index: 1;
-  }
-
-  .stat-unit b {
-    display: block;
-    font-family: var(--display);
-    font-size: 1.6rem;
-    color: var(--text-main);
-  }
-
-  .stat-unit span {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-  }
-
-  /* ---------------- Filter Tabs ---------------- */
-  .filter-container {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin: 40px 0 30px;
-    flex-wrap: wrap;
-  }
-
-  .filter-tab {
-    padding: 8px 18px;
-    border-radius: 999px;
-    background: var(--card-dark);
-    border: 1px solid var(--card-border);
-    color: var(--text-muted);
-    font-size: 0.85rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s var(--ease);
-  }
-
-  .filter-tab:hover, .filter-tab.active {
-    background: var(--primary);
-    color: #fff;
-    border-color: var(--primary);
-    box-shadow: 0 4px 15px var(--primary-glow);
-  }
-
-  /* ---------------- Projects Grid ---------------- */
-  .project-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 28px;
-    margin-bottom: 80px;
-  }
-
-  .project-card {
-    background: var(--card-dark);
-    border: 1px solid var(--card-border);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.35s var(--ease);
-    position: relative;
-  }
-
-  .project-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
-    border-color: rgba(99, 102, 241, 0.4);
-  }
-
-  .card-banner {
-    height: 180px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .card-banner svg {
-    width: 64px;
-    height: 64px;
-    transition: transform 0.4s var(--ease);
-  }
-
-  .project-card:hover .card-banner svg {
-    transform: scale(1.1) rotate(-3deg);
-  }
-
-  .card-banner .category-badge {
-    position: absolute;
-    top: 14px;
-    right: 14px;
-    font-size: 0.72rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 4px 10px;
-    border-radius: 6px;
-    background: rgba(9, 13, 22, 0.6);
-    backdrop-filter: blur(8px);
-    color: #fff;
-  }
-
-  .card-content {
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-  }
-
-  .card-title {
-    font-family: var(--display);
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin-bottom: 8px;
-    color: var(--text-main);
-  }
-
-  .card-desc {
-    color: var(--text-muted);
-    font-size: 0.88rem;
-    line-height: 1.5;
-    margin-bottom: 20px;
-    flex: 1;
-  }
-
-  .feature-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: 20px;
-  }
-
-  .tag {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    color: #cbd5e1;
-    font-size: 0.72rem;
-    padding: 3px 8px;
-    border-radius: 4px;
-  }
-
-  .card-actions {
-    display: flex;
-    gap: 10px;
-  }
-
-  .card-actions .btn {
-    flex: 1;
-    font-size: 0.82rem;
-  }
-
-  /* Distinct Accent Gradients */
-  .bg-university { background: linear-gradient(135deg, #1e1b4b, #312e81); }
-  .bg-cs { background: linear-gradient(135deg, #0f172a, #1e293b); }
-  .bg-hospital { background: linear-gradient(135deg, #064e3b, #047857); }
-  .bg-bookstore { background: linear-gradient(135deg, #451a03, #78350f); }
-  .bg-food { background: linear-gradient(135deg, #7c2d12, #9a3412); }
-
-  /* ---------------- Footer ---------------- */
-  footer.site-footer {
-    background: #06090e;
-    border-top: 1px solid var(--card-border);
-    padding: 40px 0;
-    text-align: center;
-    font-size: 0.85rem;
-    color: var(--text-muted);
-  }
-
-  footer strong {
-    color: var(--text-main);
-  }
-
-  @media (max-width: 768px) {
-    .project-grid { grid-template-columns: 1fr; }
-    nav.nav-links { display: none; }
-  }
-</style>
+      .card-description {
+        min-height: auto;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<header class="site-header">
-  <div class="wrap bar">
-    <div class="brand">
-      <div class="brand-badge">GS</div>
-      <div>
-        <div class="brand-title">Gaurav Singh</div>
-        <div class="brand-subtitle">Full-Stack & Web Applications Portfolio</div>
-      </div>
+  <main class="container">
+    <div class="projects-grid">
+
+      <!-- 1. ICFAI University -->
+      <article class="project-card">
+        <div>
+          <div class="card-header">
+            <span class="card-icon">🏛️</span>
+            <h2 class="card-title">ICFAI University</h2>
+          </div>
+          <p class="card-description">
+            Comprehensive university portal featuring interactive department spotlight, fee calculator, dynamic greeting, and admission validation.
+          </p>
+        </div>
+        <div>
+          <div class="file-badge">university.html</div>
+          <a href="university.html" class="open-btn">Open Live Project &rarr;</a>
+        </div>
+      </article>
+
+      <!-- 2. CS Department -->
+      <article class="project-card">
+        <div>
+          <div class="card-header">
+            <span class="card-icon">💻</span>
+            <h2 class="card-title">CS Department</h2>
+          </div>
+          <p class="card-description">
+            Department website showcasing course details explorer, admission enquiry form with regex validation, and fee estimation calculator.
+          </p>
+        </div>
+        <div>
+          <div class="file-badge">CS Department.html</div>
+          <a href="CS Department.html" class="open-btn">Open Live Project &rarr;</a>
+        </div>
+      </article>
+
+      <!-- 3. SMS Hospital -->
+      <article class="project-card">
+        <div>
+          <div class="card-header">
+            <span class="card-icon">🏥</span>
+            <h2 class="card-title">SMS Hospital</h2>
+          </div>
+          <p class="card-description">
+            Multi-specialty healthcare portal featuring emergency hotline access, OPD doctor schedules, appointment booking form, and interactive visit cost estimator.
+          </p>
+        </div>
+        <div>
+          <div class="file-badge">hospital.html</div>
+          <a href="hospital.html" class="open-btn">Open Live Project &rarr;</a>
+        </div>
+      </article>
+
+      <!-- 4. Inkwell & Co. Bookstore -->
+      <article class="project-card">
+        <div>
+          <div class="card-header">
+            <span class="card-icon">📚</span>
+            <h2 class="card-title">Inkwell &amp; Co. Bookstore</h2>
+          </div>
+          <p class="card-description">
+            Modern e-commerce bookstore with book category filters, interactive cart and wishlist side drawers, and checkout modal flow.
+          </p>
+        </div>
+        <div>
+          <div class="file-badge">book store.html</div>
+          <a href="book store.html" class="open-btn">Open Live Project &rarr;</a>
+        </div>
+      </article>
+
+      <!-- 5. Food Corner Restaurant -->
+      <article class="project-card">
+        <div>
+          <div class="card-header">
+            <span class="card-icon">🍽️</span>
+            <h2 class="card-title">Food Corner Restaurant</h2>
+          </div>
+          <p class="card-description">
+            Restaurant application with live order pricing estimator, chef spotlight switcher, table reservation form, and menu filters.
+          </p>
+        </div>
+        <div>
+          <div class="file-badge">food corner.html</div>
+          <a href="food corner.html" class="open-btn">Open Live Project &rarr;</a>
+        </div>
+      </article>
+
     </div>
-    <nav class="nav-links">
-      <a href="#projects">All Projects</a>
-      <a href="#about">About</a>
-      <a href="mailto:contact@gaurav.example" class="btn btn-primary">Get In Touch</a>
-    </nav>
-  </div>
-</header>
+  </main>
 
-<main class="wrap">
-  <section class="hero" id="about">
-    <div class="hero-tag">
-      <span class="dot"></span> 2026 Production-Ready Showcase
-    </div>
-    <h1>Central Hub of <span>Web Projects</span></h1>
-    <p class="lead">
-      Explore the complete collection of web portals built with modern responsive layouts, vanilla JavaScript calculators, interactive forms, and accessibility-first design.
-    </p>
-
-    <div class="stats-row">
-      <div class="stat-unit">
-        <b>5</b>
-        <span>Web Portals</span>
-      </div>
-      <div class="stat-unit">
-        <b>100%</b>
-        <span>Responsive</span>
-      </div>
-      <div class="stat-unit">
-        <b>Vanilla JS</b>
-        <span>Zero Heavy Libraries</span>
-      </div>
-      <div class="stat-unit">
-        <b>2026</b>
-        <span>Academic Year</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Filter tabs -->
-  <div class="filter-container" id="filterTabs">
-    <button class="filter-tab active" data-filter="all">All Portals (5)</button>
-    <button class="filter-tab" data-filter="education">Education</button>
-    <button class="filter-tab" data-filter="healthcare">Healthcare</button>
-    <button class="filter-tab" data-filter="commerce">E-Commerce</button>
-    <button class="filter-tab" data-filter="hospitality">Hospitality</button>
-  </div>
-
-  <!-- Projects Grid -->
-  <section class="project-grid" id="projects">
-
-    <!-- 1. ICFAI University -->
-    <article class="project-card" data-category="education">
-      <div class="card-banner bg-university">
-        <span class="category-badge">Education</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="1.6">
-          <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"></path>
-          <path d="M6 6h10M6 10h10M6 14h6"></path>
-        </svg>
-      </div>
-      <div class="card-content">
-        <h3 class="card-title">ICFAI University Portal</h3>
-        <p class="card-desc">
-          Official institutional portal with live dynamic greeting, course spotlight switcher, live semester fee calculator, and recruitment packages.
-        </p>
-        <div class="feature-tags">
-          <span class="tag">Placement Records</span>
-          <span class="tag">Fee Calculator</span>
-          <span class="tag">Admission Form</span>
-        </div>
-        <div class="card-actions">
-          <a href="university_2.html" class="btn btn-primary">Open Portal</a>
-          <a href="university.html" class="btn btn-outline">Alt Link</a>
-        </div>
-      </div>
-    </article>
-
-    <!-- 2. Computer Science Department -->
-    <article class="project-card" data-category="education">
-      <div class="card-banner bg-cs">
-        <span class="category-badge">Department</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="1.6">
-          <polyline points="16 18 22 12 16 6"></polyline>
-          <polyline points="8 6 2 12 8 18"></polyline>
-          <line x1="14" y1="4" x2="10" y2="20"></line>
-        </svg>
-      </div>
-      <div class="card-content">
-        <h3 class="card-title">Department of Computer Science</h3>
-        <p class="card-desc">
-          Academic program browser for BCA, MCA, B.Tech, and M.Tech tracks with accordion course syllabus, lab facilities, and faculty enquiry validation.
-        </p>
-        <div class="feature-tags">
-          <span class="tag">Course Browser</span>
-          <span class="tag">Curriculum Details</span>
-          <span class="tag">Form Validation</span>
-        </div>
-        <div class="card-actions">
-          <a href="CS Department_2.html" class="btn btn-primary">Open Department</a>
-          <a href="CS Department.html" class="btn btn-outline">Alt Link</a>
-        </div>
-      </div>
-    </article>
-
-    <!-- 3. SMS Hospital -->
-    <article class="project-card" data-category="healthcare">
-      <div class="card-banner bg-hospital">
-        <span class="category-badge">Healthcare</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="1.6">
-          <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-        </svg>
-      </div>
-      <div class="card-content">
-        <h3 class="card-title">SMS Multi-Specialty Hospital</h3>
-        <p class="card-desc">
-          Modern healthcare interface featuring 24/7 emergency hotline, departmental slider, appointment booking form, and interactive visit cost estimator.
-        </p>
-        <div class="feature-tags">
-          <span class="tag">24/7 Emergency</span>
-          <span class="tag">Doctor Schedule</span>
-          <span class="tag">Cost Estimator</span>
-        </div>
-        <div class="card-actions">
-          <a href="hospital_2.html" class="btn btn-primary">Open Hospital</a>
-          <a href="hospital.html" class="btn btn-outline">Alt Link</a>
-        </div>
-      </div>
-    </article>
-
-    <!-- 4. Inkwell & Co. Bookstore -->
-    <article class="project-card" data-category="commerce">
-      <div class="card-banner bg-bookstore">
-        <span class="category-badge">E-Commerce</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="1.6">
-          <path d="M12 21s-7.5-4.6-10-9.3C.5 8 2 4 6 4c2.4 0 3.9 1.3 6 3.6C14.1 5.3 15.6 4 18 4c4 0 5.5 4 4 7.7C19.5 16.4 12 21 12 21z"></path>
-        </svg>
-      </div>
-      <div class="card-content">
-        <h3 class="card-title">Inkwell & Co. Bookstore</h3>
-        <p class="card-desc">
-          Online literary store with real-time search, multi-category filtering, shopping cart & wishlist side drawers, and checkout modal workflows.
-        </p>
-        <div class="feature-tags">
-          <span class="tag">Cart & Wishlist</span>
-          <span class="tag">Live Search</span>
-          <span class="tag">Checkout Modal</span>
-        </div>
-        <div class="card-actions">
-          <a href="book store_2.html" class="btn btn-primary">Open Bookstore</a>
-          <a href="book store.html" class="btn btn-outline">Alt Link</a>
-        </div>
-      </div>
-    </article>
-
-    <!-- 5. Food Corner -->
-    <article class="project-card" data-category="hospitality">
-      <div class="card-banner bg-food">
-        <span class="category-badge">Restaurant</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="1.6">
-          <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
-          <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
-          <line x1="6" y1="1" x2="6" y2="4"></line>
-          <line x1="10" y1="1" x2="10" y2="4"></line>
-          <line x1="14" y1="1" x2="14" y2="4"></line>
-        </svg>
-      </div>
-      <div class="card-content">
-        <h3 class="card-title">Food Corner Cafe</h3>
-        <p class="card-desc">
-          Modern dining restaurant showcase with category filters (Pizza, Burgers, Indian), chef specials, interactive order price builder, and table reservations.
-        </p>
-        <div class="feature-tags">
-          <span class="tag">Live Order Total</span>
-          <span class="tag">Table Booking</span>
-          <span class="tag">Menu Filters</span>
-        </div>
-        <div class="card-actions">
-          <a href="food corner_2.html" class="btn btn-primary">Open Food Corner</a>
-          <a href="food corner.html" class="btn btn-outline">Alt Link</a>
-        </div>
-      </div>
-    </article>
-
-  </section>
-</main>
-
-<footer class="site-footer">
-  <div class="wrap">
-    <p>© 2026 <strong>Gaurav Singh</strong> — All Rights Reserved.</p>
-    <p style="margin-top: 6px; font-size: 0.78rem;">Designed and engineered for performance, clean architecture, and responsive devices.</p>
-  </div>
-</footer>
-
-<script>
-  // Simple interactive filtering
-  const filterTabs = document.querySelectorAll('.filter-tab');
-  const cards = document.querySelectorAll('.project-card');
-
-  filterTabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      filterTabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-
-      const filter = tab.getAttribute('data-filter');
-
-      cards.forEach(card => {
-        if (filter === 'all' || card.getAttribute('data-category') === filter) {
-          card.style.display = 'flex';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    });
-  });
-</script>
+  <footer>
+    &copy; 2026 Gaurav Singh &bull; Hosted with GitHub Pages
+  </footer>
 
 </body>
 </html>
